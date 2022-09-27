@@ -1,7 +1,15 @@
 package com.sparta;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TrainingCenter {
     private static int centerID =0;
+    private  List<Trainee> traineeList = new ArrayList<>();
+
+    public List<Trainee> getTraineeList() {
+        return traineeList;
+    }
 
     public TrainingCenter(){
         setCenterID(centerID++);
@@ -19,5 +27,6 @@ public class TrainingCenter {
                 "centerID=" + centerID +
                 '}';
     }
+
 
 }
