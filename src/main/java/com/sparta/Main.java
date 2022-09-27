@@ -1,14 +1,9 @@
 package com.sparta;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner employeesInput = new Scanner(System.in);
-        System.out.println("Enter the number of trainees");
-         int trainees = employeesInput.nextInt();
-
 
         Scanner inputMonths = new Scanner(System.in);
         System.out.println("Enter the number of months");
