@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class TrainingCenter {
     private static int centerID =0;
     private static List<Trainee> traineeList = new ArrayList<>();
-
+    private static int max;
 
 
     public static List<Trainee> getTraineeList() {
