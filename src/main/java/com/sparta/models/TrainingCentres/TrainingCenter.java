@@ -1,15 +1,17 @@
-package com.sparta;
+package com.sparta.models.TrainingCentres;
 
+import com.sparta.Academy;
+import com.sparta.Trainee;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrainingCenter {
+public abstract class TrainingCenter {
     private static int centerID =0;
     private static List<Trainee> traineeList = new ArrayList<>();
 
-    private static final int max = 100;
+
 
     public static List<Trainee> getTraineeList() {
         return traineeList;
@@ -37,7 +39,7 @@ public class TrainingCenter {
     }
 
     public static void assgintoTraining(Trainee trainee) {
-        for(TrainingCenter t:Academy.centerList)
+        for(TrainingCenter t: Academy.centerList)
         {
             if(t.isFull()==false) {
                 t.getTraineeList().add(trainee);
