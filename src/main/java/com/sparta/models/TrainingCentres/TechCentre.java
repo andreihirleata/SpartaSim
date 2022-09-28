@@ -7,4 +7,9 @@ public class TechCentre extends TrainingCenter {
         this.courseName = courseName;
     }
 
+    @Override
+    public boolean isFull() {
+        return getTraineeList().size() >= max;
+    }
+
 }

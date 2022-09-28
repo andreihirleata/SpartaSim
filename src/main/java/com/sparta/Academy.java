@@ -55,7 +55,7 @@ public class Academy {
         {
             if(i%2==0)
             {
-                addCenter( TrainingCentreFactory.generateTrainingCentre());
+                TrainingCentreFactory.generateTrainingCentre();
 
             }
             Trainee.generateTrainees();
