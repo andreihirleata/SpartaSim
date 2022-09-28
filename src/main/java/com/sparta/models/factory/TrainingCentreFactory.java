@@ -3,7 +3,6 @@ package com.sparta.models.factory;
 import com.sparta.Academy;
 import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
-import com.sparta.models.TrainingCentres.TrainingCenter;
 import com.sparta.models.TrainingCentres.TrainingHub;
 import com.sparta.models.util.Randomizer;
 
@@ -16,7 +15,7 @@ public class TrainingCentreFactory {
             case 1: {
                 if(Academy.centerList.stream().filter(t -> t.getClass() == Bootcamp.class).count() < 2) {
                     Academy.centerList.add(new Bootcamp());
-                }
+                } else generateTrainingCentre();
             }
             case 2:  {
                 int rand = Randomizer.getRandom(1,3);

@@ -1,9 +1,6 @@
 package com.sparta;
 
-import com.sparta.models.TrainingCentres.Bootcamp;
-import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
-import com.sparta.models.TrainingCentres.TrainingHub;
 import com.sparta.models.factory.TrainingCentreFactory;
 
 import java.util.ArrayList;
@@ -59,11 +56,10 @@ public class Academy {
             if(i%2==0)
             {
                 TrainingCentreFactory.generateTrainingCentre();
+
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
-            TrainingCenter.closeCenters();
-
             month++;
             System.out.println(this.toString());
         }
@@ -72,74 +68,9 @@ public class Academy {
     @Override
     public String toString()
     {
-        int bootcampOpen = 0;
-        int bootcampClosed = 0;
-        int bootcampFull = 0;
-        for(TrainingCenter boot:centerList)
-        {
-            if(boot.closed==true)
-            {
-                bootcampClosed++;
-            }
-            else if(boot.getClass()== Bootcamp.class)
-            {
-                if (boot.isFull() == false) {
-                    bootcampOpen++;
-                }
-                else{
-                    bootcampFull++;
-                }
-            }
-        }
-        int techCentreOpen = 0;
-        int techCentreClosed = 0;
-        int techCentreFull = 0;
-        for(TrainingCenter tech:centerList)
-        {
-            if(tech.closed==true)
-            {
-                techCentreClosed++;
-            }
-            else if(tech.getClass()== TechCentre.class)
-            {
-                if (tech.isFull() == false) {
-                    techCentreOpen++;
-                }
-                else{
-                    techCentreFull++;
-                }
-            }
-        }
-        int hubOpen = 0;
-        int hubClosed = 0;
-        int hubFull = 0;
-        for(TrainingCenter hub:centerList)
-        {
-            if(hub.closed==true)
-            {
-                hubClosed++;
-            }
-            else if(hub.getClass()== TrainingCenter.class)
-            {
-                if (hub.isFull() == false) {
-                    hubOpen++;
-                }
-                else{
-                    hubFull++;
-                }
-            }
-        }
-
-        return "Month: "+month+"\nNumber of open boot camps: "
-                +bootcampOpen+"\nNumber of full boot camps: "
-                +bootcampFull+"\nNumber of closed boot camps: "
-                +bootcampClosed+"\nNumbers of tech centres open: "
-                +techCentreOpen+"\nNumbers of tech centres full: "
-                +techCentreFull+"\nNumbers of tech centres closed: "
-                +techCentreClosed+"\nNumbers of training hubs open: "
-                +hubOpen+"\nNumber of training hubs full: "
-                +hubFull+"\nNumber of training hubs closed: "
-                +hubClosed+"\nNumbers trainees in training: "
+        return "Month: "+month+"\nNumber of open centers: "
+                +this.getNumberOfOpenCentres()+"\nNumber of full centers: "
+                +this.getNumberOfFullCentres()+"\nNumbers trainees in training: "
                 +this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "
                 +this.getNumberOfTraineesWaiting()+"\n";
     }
