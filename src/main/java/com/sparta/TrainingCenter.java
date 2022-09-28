@@ -20,11 +20,7 @@ public class TrainingCenter {
     }
 
     public static boolean isFull() {
-        if(getTraineeList().size()<max)
-        {
-            return false;
-        }
-        return true;
+        return getTraineeList().size() >= max;
     }
 
     public int getCenterID() {return centerID;}
