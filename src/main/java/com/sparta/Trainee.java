@@ -4,9 +4,7 @@ import com.sparta.models.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
-import java.util.List;
 
 public class Trainee {
 	private final String courseName;
