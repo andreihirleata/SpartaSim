@@ -30,8 +30,7 @@ public class Trainee {
 		int numOfTrainees = Randomizer.getRandom(50,100);
 		for(int i = 0; i <= numOfTrainees; i++) {
 			Trainee trainee = TraineeFactory.generateTrainee();
-			System.out.println(trainee.courseName);
-			getWaitingList().add(trainee);
+			getWaitingList().addLast(trainee);
 		}
 	}
 }
