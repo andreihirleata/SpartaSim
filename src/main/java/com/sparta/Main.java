@@ -4,8 +4,6 @@ package com.sparta;
 import java.util.Scanner;
 
 public class Main {
-    public Main() {
-    }
 
     public static void main(String[] args) {
         Scanner inputMonths = new Scanner(System.in);
