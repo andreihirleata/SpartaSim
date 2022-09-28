@@ -57,6 +57,8 @@ public class Academy {
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
+            TrainingCenter.closeCenters();
+
             month++;
             System.out.println(this.toString());
         }

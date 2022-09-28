@@ -51,6 +51,19 @@ public class TrainingCenter {
         }
     }
 
+    public static void closeCenters() {
+        for(TrainingCenter tc:Academy.centerList)
+        {
+            if(tc.getTraineeList().size()<25)
+            {
+                for(Trainee t:tc.getTraineeList()) {
+                    Trainee.getWaitingList().add(t);
+                }
+                tc.getTraineeList().clear();
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "TrainingCenter{" +
