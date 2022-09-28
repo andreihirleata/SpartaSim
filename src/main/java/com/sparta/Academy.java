@@ -7,6 +7,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
 
+    int month = 0;
+
     public void addCenter(TrainingCenter center) {
         centerList.add(center);
     }
@@ -46,9 +48,23 @@ public class Academy {
         return Trainee.getWaitingList().size();
     }
 
+    public void simulate(int months) {
+        for(int i=1;i<=months;i++)
+        {
+            if(i%2==0)
+            {
+                addCenter(new TrainingCenter());
+            }
+            Trainee.generateTrainees();
+            TrainingCenter.openDoors();
+            month++;
+            System.out.println(this.toString());
+        }
+    }
+
     @Override
     public String toString()
     {
-        return "Number of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumbers trainees in training: "+this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "+this.getNumberOfTraineesWaiting();
+        return "Month: "+month+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumbers trainees in training: "+this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "+this.getNumberOfTraineesWaiting()+"\n";
     }
 }
