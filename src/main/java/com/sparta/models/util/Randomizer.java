@@ -13,6 +13,6 @@ public class Randomizer {
 
     public static int getRandom(int lowLimit, int highLimit) {
         Random rand = new Random();
-        return rand.nextInt(lowLimit, highLimit);
+        return rand.nextInt(lowLimit, highLimit + 1);
     }
 }

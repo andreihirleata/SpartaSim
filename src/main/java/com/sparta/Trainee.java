@@ -1,5 +1,6 @@
 package com.sparta;
 
+import com.sparta.models.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
@@ -7,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trainee {
+	private final String courseName;
 	private static int idIncrement = 0;
 	private final int id;
 	private static ArrayDeque<Trainee> waitingList = new ArrayDeque<>();
 
-	public Trainee () {
+	public Trainee (String courseName) {
+		this.courseName = courseName;
 		this.id = idIncrement++;
 	}
 
@@ -26,7 +29,8 @@ public class Trainee {
 	public static void generateTrainees() {
 		int numOfTrainees = Randomizer.getRandom(50,100);
 		for(int i = 0; i <= numOfTrainees; i++) {
-			Trainee trainee = new Trainee();
+			Trainee trainee = TraineeFactory.generateTrainee();
+			System.out.println(trainee.courseName);
 			getWaitingList().add(trainee);
 		}
 	}
