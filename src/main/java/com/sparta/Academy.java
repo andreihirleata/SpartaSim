@@ -58,7 +58,7 @@ public class Academy {
         {
             if(i%2==0)
             {
-                addCenter(TrainingCentreFactory.generateTrainingCentre());
+                TrainingCentreFactory.generateTrainingCentre();
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
@@ -100,7 +100,7 @@ public class Academy {
             {
                 techCentreClosed++;
             }
-            if(tech.getClass()== TechCentre.class)
+            else if(tech.getClass()== TechCentre.class)
             {
                 if (tech.isFull() == false) {
                     techCentreOpen++;
@@ -119,7 +119,7 @@ public class Academy {
             {
                 hubClosed++;
             }
-            if(hub.getClass()== TrainingCenter.class)
+            else if(hub.getClass()== TrainingCenter.class)
             {
                 if (hub.isFull() == false) {
                     hubOpen++;
