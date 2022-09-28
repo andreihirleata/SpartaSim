@@ -80,6 +80,7 @@ public class Academy {
     public String summaryOfSimulator()
     {
 
-        return "Total Month: "+totalMonth+"\nNumber of open centres:\n\tTraining centers: "+getNumberOfOpenCentres();
+        return "Total Month: "+totalMonth+"\nNumber of open centres:\n\tTraining centers: "
+                +getNumberOfOpenCentres();
     }
 }
