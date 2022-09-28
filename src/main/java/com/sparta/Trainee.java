@@ -8,10 +8,7 @@ import java.util.List;
 public class Trainee {
 	private static int idIncrement = 0;
 	private final int id;
-
-
-
-	private static List<Trainee> traineeList = new ArrayList<>();
+	private static List<Trainee> waitingList = new ArrayList<>();
 
 	public Trainee () {
 		this.id = idIncrement++;
@@ -21,14 +18,15 @@ public class Trainee {
 		return id;
 	}
 
-	public static List<Trainee> getTraineeList() {
-		return traineeList;
+	public static List<Trainee> getWaitingList() {
+		return waitingList;
 	}
 
 	public static void generateTrainees() {
 		int numOfTrainees = Randomizer.getRandom(50,100);
 		for(int i = 0; i <= numOfTrainees; i++) {
-			traineeList.add(new Trainee());
+			Trainee trainee = new Trainee();
+			getWaitingList().add(trainee);
 		}
 	}
 }
