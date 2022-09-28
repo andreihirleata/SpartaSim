@@ -12,6 +12,7 @@ public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
 
     int month = 0;
+    int totalMonth = 0;
 
     public void addCenter(TrainingCenter center) {
         centerList.add(center);
@@ -21,7 +22,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == false) {
+            if (t.isFull() == false && t.closed==false) {
                 num++;
             }
         }
@@ -32,7 +33,18 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == true) {
+            if (t.isFull() == true && t.closed==false) {
+                num++;
+            }
+        }
+        return num;
+    }
+    public int getNumberOfClosedCentres() {
+        int num = 0;
+        for(TrainingCenter t:centerList)
+        {
+            if(t.closed==true)
+            {
                 num++;
             }
         }
@@ -128,7 +140,8 @@ public class Academy {
             }
         }
 
-        return "Month: "+month+"\nNumber of open boot camps: "
+        return "Month: "+month+"\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of closed centers: "+this.getNumberOfOpenCentres()+
+                "\nNumber of open boot camps: "
                 +bootcampOpen+"\nNumber of full boot camps: "
                 +bootcampFull+"\nNumber of closed boot camps: "
                 +bootcampClosed+"\nNumbers of tech centres open: "
@@ -140,5 +153,11 @@ public class Academy {
                 +hubClosed+"\nNumbers trainees in training: "
                 +this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "
                 +this.getNumberOfTraineesWaiting()+"\n";
+    }
+    public String summaryOfSimulator()
+    {
+
+        return "Total Month: "+totalMonth+"\nNumber of open centres:\n\tTraining centers: "
+                +getNumberOfOpenCentres();
     }
 }
