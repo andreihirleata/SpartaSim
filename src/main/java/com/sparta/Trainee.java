@@ -2,13 +2,14 @@ package com.sparta;
 
 import com.sparta.models.util.Randomizer;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Trainee {
 	private static int idIncrement = 0;
 	private final int id;
-	private static List<Trainee> waitingList = new ArrayList<>();
+	private static ArrayDeque<Trainee> waitingList = new ArrayDeque<>();
 
 	public Trainee () {
 		this.id = idIncrement++;
@@ -18,7 +19,7 @@ public class Trainee {
 		return id;
 	}
 
-	public static List<Trainee> getWaitingList() {
+	public static ArrayDeque<Trainee> getWaitingList() {
 		return waitingList;
 	}
 

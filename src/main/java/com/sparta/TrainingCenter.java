@@ -36,7 +36,7 @@ public class TrainingCenter {
     public static void openDoors() {
         int numOfTrainees = Randomizer.getRandom(0,50);
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().get(0));
+            assgintoTraining(Trainee.getWaitingList().getFirst());
         }
     }
 
@@ -57,7 +57,7 @@ public class TrainingCenter {
             if(tc.getTraineeList().size()<25)
             {
                 for(Trainee t:tc.getTraineeList()) {
-                    Trainee.getWaitingList().add(t);
+                    Trainee.getWaitingList().addFirst(t);
                 }
                 tc.getTraineeList().clear();
             }
