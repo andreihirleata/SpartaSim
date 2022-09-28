@@ -1,8 +1,9 @@
 package com.sparta;
 
+import com.sparta.models.TrainingCentres.TrainingCenter;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
@@ -67,7 +68,11 @@ public class Academy {
     @Override
     public String toString()
     {
-        return "Month: "+month+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumbers trainees in training: "+this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "+this.getNumberOfTraineesWaiting()+"\n";
+        return "Month: "+month+"\nNumber of open centers: "
+                +this.getNumberOfOpenCentres()+"\nNumber of full centers: "
+                +this.getNumberOfFullCentres()+"\nNumbers trainees in training: "
+                +this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "
+                +this.getNumberOfTraineesWaiting()+"\n";
     }
 
     public String summaryOfSimulator()
