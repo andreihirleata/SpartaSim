@@ -1,5 +1,6 @@
 package com.sparta;
 
+import com.sparta.models.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class Trainee {
 	public static void generateTrainees() {
 		int numOfTrainees = Randomizer.getRandom(50,100);
 		for(int i = 0; i <= numOfTrainees; i++) {
-			Trainee trainee = new Trainee(courseName);
+			Trainee trainee = TraineeFactory.generateTrainee();
+			System.out.println(trainee.courseName);
 			getWaitingList().add(trainee);
 		}
 	}
