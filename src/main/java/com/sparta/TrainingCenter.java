@@ -32,15 +32,15 @@ public class TrainingCenter {
     public static void openDoors() {
         int numOfTrainees = Randomizer.getRandom(0,50);
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().get(0));
+            assgintoTraining(Trainee.getWaitingList().getFirst());
         }
     }
 
     public static void assgintoTraining(Trainee trainee) {
         for(TrainingCenter t:Academy.centerList)
         {
-            if(t.isFull()==false) {
-                t.getTraineeList().add(trainee);
+            if(!isFull()) {
+                getTraineeList().add(trainee);
                 Trainee.getWaitingList().remove(trainee);
                 return;
             }
