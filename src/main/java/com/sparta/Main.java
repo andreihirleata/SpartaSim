@@ -28,13 +28,13 @@ public class Main {
             {
                 academy.addCenter(new TrainingCenter());
             }
-            Trainee.generateTrainees();
-            Trainee.openDoors();
+//            Trainee.generateTrainees();
+//            Trainee.openDoors();
         }
 
-        Trainee.getTraineeList().stream().forEach((t) -> {
-            System.out.println(t.getId());
-        });
+//        Trainee.getTraineeList().stream().forEach((t) -> {
+//            System.out.println(t.getId());
+//        });
         System.out.println(academy);
     }
 }
