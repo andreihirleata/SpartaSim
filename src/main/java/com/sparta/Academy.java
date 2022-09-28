@@ -1,6 +1,7 @@
 package com.sparta;
 
 import com.sparta.models.TrainingCentres.TrainingCenter;
+import com.sparta.models.factory.TrainingCentreFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +55,8 @@ public class Academy {
         {
             if(i%2==0)
             {
-                addCenter(new TrainingCenter());
+                addCenter( TrainingCentreFactory.generateTrainingCentre());
+
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
