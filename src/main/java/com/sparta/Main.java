@@ -19,22 +19,15 @@ public class Main {
         int numberofMonths = inputMonths.nextInt();
 
         Academy academy = new Academy();
+
+        academy.simulate(numberofMonths);
         //Scanner employeesInput = new Scanner(System.in);
         //System.out.println("Enter the number of trainees");
         //int trainees = employeesInput.nextInt();
-        for(int i=0;i<=numberofMonths;i++)
-        {
-            if(i%2==0)
-            {
-                academy.addCenter(new TrainingCenter());
-            }
-//            Trainee.generateTrainees();
-//            Trainee.openDoors();
-        }
 
-//        Trainee.getTraineeList().stream().forEach((t) -> {
-//            System.out.println(t.getId());
-//        });
-        System.out.println(academy);
+
+        //Trainee.getTraineeList().stream().forEach((t) -> {
+           // System.out.println(t.getId());
+       // });
     }
 }

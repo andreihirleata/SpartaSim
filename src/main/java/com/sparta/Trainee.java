@@ -18,9 +18,15 @@ public class Trainee {
 		return id;
 	}
 
-
 	public static List<Trainee> getWaitingList() {
 		return waitingList;
 	}
 
+	public static void generateTrainees() {
+		int numOfTrainees = Randomizer.getRandom(50,100);
+		for(int i = 0; i <= numOfTrainees; i++) {
+			Trainee trainee = new Trainee();
+			getWaitingList().add(trainee);
+		}
+	}
 }
