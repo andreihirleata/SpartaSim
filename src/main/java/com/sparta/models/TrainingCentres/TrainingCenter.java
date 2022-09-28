@@ -12,7 +12,6 @@ import java.util.List;
 public abstract class TrainingCenter {
     private static int centerID =0;
     private static List<Trainee> traineeList = new ArrayList<>();
-
     public static boolean closed = false;
 
     public static List<Trainee> getTraineeList() {
@@ -62,7 +61,7 @@ public abstract class TrainingCenter {
                 for(Trainee t:tc.getTraineeList()) {
                     Trainee.getWaitingList().addFirst(t);
                 }
-                tc.closed=true;
+                tc.closed = true;
                 tc.getTraineeList().clear();
             }
         }
