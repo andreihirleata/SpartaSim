@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class TrainingCenter {
     private static int centerID =0;
     private static List<Trainee> traineeList = new ArrayList<>();
-    private static int max;
+
 
 
     public static List<Trainee> getTraineeList() {
@@ -21,9 +21,8 @@ public abstract class TrainingCenter {
         setCenterID(centerID++);
     }
 
-    public static boolean isFull() {
-        return getTraineeList().size() >= max;
-    }
+    public abstract boolean isFull();
+
 
     public int getCenterID() {return centerID;}
 
@@ -41,7 +40,7 @@ public abstract class TrainingCenter {
     public static void assgintoTraining(Trainee trainee) {
         for(TrainingCenter t: Academy.centerList)
         {
-            if(!isFull()) {
+            if(t.isFull() == false) {
                 getTraineeList().add(trainee);
                 Trainee.getWaitingList().remove(trainee);
                 return;
