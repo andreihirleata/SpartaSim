@@ -1,7 +1,6 @@
 package com.sparta.models.factory;
 
 import com.sparta.Trainee;
-import com.sparta.models.util.Courses;
 import com.sparta.models.util.Randomizer;
 
 public class TraineeFactory {
