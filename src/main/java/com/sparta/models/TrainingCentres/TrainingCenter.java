@@ -25,6 +25,7 @@ public abstract class TrainingCenter {
     public abstract boolean isFull();
 
     public int getCenterID() {return centerID;}
+    public boolean isClosed() {return closed;}
 
     public void setCenterID(int centerID) {
         this.centerID = centerID;
@@ -47,7 +48,7 @@ public abstract class TrainingCenter {
             }
 
             t = (TrainingCenter)var1.next();
-        } while(t.isFull());
+        } while(t.isFull() || t.isClosed());
 
         t.getTraineeList().add(trainee);
         Trainee.getWaitingList().remove(trainee);
