@@ -41,7 +41,8 @@ public class Academy {
     public int getNumberOfTraineesTraining() {
         int num = 0;
         for (TrainingCenter t : centerList) {
-            num += t.getTraineeList().size();
+            num +=  t.getTraineeList().size();
+
         }
         return num;
     }
@@ -58,12 +59,13 @@ public class Academy {
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
-            if (i > 3) {
+            if (i >= 3) {
                 TrainingCenter.closeCenters();
             }
             month++;
             System.out.println(this);
         }
+
     }
 
     @Override
@@ -101,11 +103,11 @@ public class Academy {
         int hubClosed = 0;
         int hubFull = 0;
         for (TrainingCenter hub : centerList) {
-            if (hub.closed == true) {
+            if (hub.closed) {
                 hubClosed = hubClosed + 1;
             }
             if (hub.getClass() == TrainingHub.class) {
-                if (hub.isFull() == false) {
+                if (!hub.isFull()) {
                     hubOpen = hubOpen + 1;
                 } else {
                     hubFull = hubFull + 1;

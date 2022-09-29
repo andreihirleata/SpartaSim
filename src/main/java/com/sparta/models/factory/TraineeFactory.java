@@ -8,5 +8,4 @@ public class TraineeFactory {
        return new Trainee(Randomizer.generateRandomCourse());
     }
 
-
 }

@@ -11,10 +11,10 @@ import java.util.List;
 
 public abstract class TrainingCenter {
     private static int centerID =0;
-    private static List<Trainee> traineeList = new ArrayList<>();
+    private  List<Trainee> traineeList = new ArrayList<>();
     public static boolean closed = false;
 
-    public static List<Trainee> getTraineeList() {
+    public  List<Trainee> getTraineeList() {
         return traineeList;
     }
 
@@ -49,7 +49,7 @@ public abstract class TrainingCenter {
             t = (TrainingCenter)var1.next();
         } while(t.isFull());
 
-        getTraineeList().add(trainee);
+        t.getTraineeList().add(trainee);
         Trainee.getWaitingList().remove(trainee);
     }
 
