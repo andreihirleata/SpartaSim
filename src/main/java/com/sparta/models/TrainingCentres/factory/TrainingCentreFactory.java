@@ -1,4 +1,4 @@
-package com.sparta.models.factory;
+package com.sparta.models.TrainingCentres.factory;
 
 import com.sparta.Academy;
 import com.sparta.models.TrainingCentres.Bootcamp;

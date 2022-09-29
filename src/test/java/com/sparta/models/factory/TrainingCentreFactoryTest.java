@@ -1,12 +1,10 @@
 package com.sparta.models.factory;
 
 import com.sparta.Academy;
-import com.sparta.models.TrainingCentres.TrainingCenter;
+import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TrainingCentreFactoryTest {
 
