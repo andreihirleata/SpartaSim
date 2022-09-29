@@ -33,4 +33,13 @@ public Client(String course){
         return courseReq;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", numRequired=" + numRequired +
+                ", courseReq='" + courseReq + '\'' +
+                ", ClientTraineeList=" + ClientTraineeList +
+                '}';
+    }
 }
