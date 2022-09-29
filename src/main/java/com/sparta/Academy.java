@@ -89,64 +89,6 @@ public class Academy {
     @Override
     public String toString()
     {
-        int bootcampOpen = 0;
-        int bootcampClosed = 0;
-        int bootcampFull = 0;
-        for(TrainingCenter boot:centerList)
-        {
-            if(boot.getClosed())
-            {
-                bootcampClosed++;
-            }
-            else if(boot instanceof Bootcamp)
-            {
-                if (!boot.isFull()) {
-                    bootcampOpen++;
-                }
-                else{
-                    bootcampFull++;
-                }
-            }
-        }
-        int techCentreOpen = 0;
-        int techCentreClosed = 0;
-        int techCentreFull = 0;
-        for(TrainingCenter tech:centerList)
-        {
-            if(tech.getClosed())
-            {
-                techCentreClosed++;
-            }
-            if(tech instanceof TechCentre)
-            {
-                if (!tech.isFull()) {
-                    techCentreOpen++;
-                }
-                else{
-                    techCentreFull++;
-                }
-            }
-        }
-        int hubOpen = 0;
-        int hubClosed = 0;
-        int hubFull = 0;
-        for(TrainingCenter hub:centerList)
-        {
-            if(hub.getClosed())
-            {
-                hubClosed++;
-            }
-            if(hub instanceof TrainingHub)
-            {
-                if (!hub.isFull()) {
-                    hubOpen++;
-                }
-                else{
-                    hubFull++;
-                }
-            }
-        }
-
         int JavaTraining=0, JavaWaiting=0, CsharpTraining=0, CsharpWaiting=0, DataTraining=0, DataWaiting=0, DevOpsTraining=0, DevOpsWaiting=0, BusinessTraining = 0, BusinessWaiting = 0;
 
         for(TrainingCenter tc:centerList)
@@ -201,7 +143,9 @@ public class Academy {
         }
 
         return "Month: " +month+
-                "\n---\nNumber of open centers: "+centerList.stream().filter(e -> !e.getClosed()).count()+
+
+                "\n---\nNumber of centers: " +centerList.size()+
+                "Number of open centers: "+centerList.stream().filter(e -> !e.getClosed()).count()+
                 "\nNumber of full centers: "+centerList.stream().filter(TrainingCenter::isFull).count()+
                 "\nNumber of closed centers: "+ centerList.stream().filter(TrainingCenter::getClosed).count() +
 
@@ -209,21 +153,22 @@ public class Academy {
                 "\nNumber of full boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(TrainingCenter::isFull).count() +
                 "\nNumber of closed boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> e.isClosed()).count()+
 
-                "\n---\nNumber of tech centres open: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.isClosed()).count()+
-                "\nNumber of tech centres full: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isFull()).count()+
-                "\nNumber of tech centres closed: "+centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isClosed()).count()+
+                "\n---\nNumber of open tech centres: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.isClosed()).count()+
+                "\nNumber of full tech centres: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isFull()).count()+
+                "\nNumber of closed tech centres: "+centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isClosed()).count()+
 
-                "\n---\nNumber of training hubs open: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.isClosed()).count()+
-                "\nNumber of training hubs full: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(e -> e.isFull()).count() +
-                "\nNumber of training hubs closed: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
+                "\n---\nNumber of open training hubs: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.isClosed()).count()+
+                "\nNumber of full training hubs: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(e -> e.isFull()).count() +
+                "\nNumber of closed training hubs: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
-//
+
+                "\n---\nNumber of trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
                 "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
                 "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
                 "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
-                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+
-                "\n---\nNumber of trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+"\n";
+                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting;
+
     }
     public String summaryOfSimulator()
     {
