@@ -17,15 +17,11 @@ public class Academy {
     int month = 0;
     int totalMonth = 0;
 
-    public void addCenter(TrainingCenter center) {
-        centerList.add(center);
-    }
-
     public int getNumberOfOpenCentres() {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == false) {
+            if (!t.isFull()) {
                 num++;
             }
         }
@@ -36,7 +32,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == true) {
+            if (t.isFull()) {
                 num++;
             }
         }
@@ -68,7 +64,7 @@ public class Academy {
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
             month++;
-            System.out.println(this.toString());
+            System.out.println(this);
         }
     }
 
@@ -80,7 +76,7 @@ public class Academy {
         {
             if(center.getClass()== Bootcamp.class)
             {
-                if (center.isFull() == false) {
+                if (!center.isFull()) {
                     bootcampOpen++;
                 }
                 else{
@@ -89,7 +85,7 @@ public class Academy {
             }
             if(center.getClass()== TechCentre.class)
             {
-                if (center.isFull() == false) {
+                if (!center.isFull()) {
                     techCentreOpen++;
                 }
                 else{
@@ -98,7 +94,7 @@ public class Academy {
             }
             if(center.getClass()== TrainingHub.class)
             {
-                if (center.isFull() == false) {
+                if (!center.isFull()) {
                     hubOpen++;
                 }
                 else{
@@ -183,7 +179,6 @@ public class Academy {
                 "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
                 "\n---\nNumber of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
                 "\n---\nNumber of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
-
 
                 "\n---\nNumber of trainees: "+numTrainees+"\nNumber trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
