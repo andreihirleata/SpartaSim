@@ -24,7 +24,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == false && t.closed==false) {
+            if (!t.isFull() && !t.getClosed()) {
                 num++;
             }
         }
@@ -35,7 +35,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == true && t.closed==false) {
+            if (t.isFull() && !t.getClosed()) {
                 num++;
             }
         }
@@ -45,7 +45,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if(t.closed==true)
+            if(t.getClosed())
             {
                 num++;
             }
@@ -90,13 +90,13 @@ public class Academy {
         int bootcampFull = 0;
         for(TrainingCenter boot:centerList)
         {
-            if(boot.closed==true)
+            if(boot.getClosed())
             {
                 bootcampClosed++;
             }
             else if(boot.getClass()== Bootcamp.class)
             {
-                if (boot.isFull() == false) {
+                if (!boot.isFull()) {
                     bootcampOpen++;
                 }
                 else{
@@ -109,13 +109,13 @@ public class Academy {
         int techCentreFull = 0;
         for(TrainingCenter tech:centerList)
         {
-            if(tech.closed==true)
+            if(tech.getClosed())
             {
                 techCentreClosed++;
             }
             if(tech.getClass()== TechCentre.class)
             {
-                if (tech.isFull() == false) {
+                if (!tech.isFull()) {
                     techCentreOpen++;
                 }
                 else{
@@ -128,13 +128,13 @@ public class Academy {
         int hubFull = 0;
         for(TrainingCenter hub:centerList)
         {
-            if(hub.closed==true)
+            if(hub.getClosed())
             {
                 hubClosed++;
             }
-            if(hub.getClass()== TrainingHub.class)
+            if(hub.getClass() == TrainingHub.class)
             {
-                if (hub.isFull() == false) {
+                if (!hub.isFull()) {
                     hubOpen++;
                 }
                 else{
@@ -196,18 +196,19 @@ public class Academy {
             }
         }
 
-        return "Month: "+month+
+        return "Month: " +month+
                 "\n---\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
                 "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
                 "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
                 "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
 
-                "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
                 "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
                 "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
                 "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
-                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n";
+                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n"+
+                "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting();
     }
     public String summaryOfSimulator()
     {
