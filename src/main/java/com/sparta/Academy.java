@@ -8,9 +8,7 @@ import com.sparta.models.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
@@ -206,20 +204,20 @@ public class Academy {
                 "\nNumber of closed centers: "+ centerList.stream().filter(TrainingCenter::getClosed).count() +
                 "\n---\nNumber of open boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> !e.getClosed()).count() +
                 "\nNumber of full boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(TrainingCenter::isFull).count() +
-                "\nNumber of closed boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> e.isClosed()).count()+
-                "\n---\nNumbers of tech centres open: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.isClosed()).count()+
-                "\nNumbers of tech centres full: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isFull()).count()+
-                "\nNumbers of tech centres closed: "+centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isClosed()).count()+
-                "\n---\nNumbers of training hubs open: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.isClosed()).count()+
-                "\nNumber of training hubs full: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(e -> e.isFull()).count() +
-                "\nNumber of training hubs closed: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
+                "\nNumber of closed boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(TrainingCenter::getClosed).count()+
+                "\n---\nNumbers of tech centres open: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.getClosed()).count()+
+                "\nNumbers of tech centres full: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(TrainingCenter::isFull).count()+
+                "\nNumbers of tech centres closed: "+centerList.stream().filter(e -> e instanceof TechCentre).filter(TrainingCenter::getClosed).count()+
+                "\n---\nNumbers of training hubs open: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.getClosed()).count()+
+                "\nNumber of training hubs full: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(TrainingCenter::isFull).count() +
+                "\nNumber of training hubs closed: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(TrainingCenter::getClosed).count() +
 
-//
-//                "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
-//                "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
-//                "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
-//                "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
-//                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n"+
+
+                "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
+                "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
+                "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
+                "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
+                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n"+
                 "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting();
     }
     public String summaryOfSimulator()

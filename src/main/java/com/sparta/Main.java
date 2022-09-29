@@ -20,6 +20,5 @@ public class Main {
         } else if (summaryOption == 2) {
             System.out.println(academy.summaryOfSimulator());
         }
-
     }
 }
