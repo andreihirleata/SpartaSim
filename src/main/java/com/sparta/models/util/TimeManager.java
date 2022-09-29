@@ -14,21 +14,23 @@ public class TimeManager {
 		endDate = currentDate;
 	}
 
-	public static LocalDate getMonthsPassed (int months) {
+	public LocalDate getMonthsPassed (int months) {
 		return monthsPassed.plusMonths(months);
 	}
 
-	public static LocalDate getCurrentDate () {
+	public LocalDate getCurrentDate () {
 		return currentDate;
 	}
 
-	public static LocalDate getStartDate (int dateStarted) {
+	public LocalDate getStartDate (int dateStarted) {
 		return startDate.plusMonths(dateStarted);
 	}
 
+
 	public static LocalDate getEndDate (int courseDuration) {return endDate.plusMonths(courseDuration);}
 
-	public static boolean courseRunning() {
+
+	public boolean courseRunning() {
 		return monthsPassed.isBefore(endDate);
 	}
 }
