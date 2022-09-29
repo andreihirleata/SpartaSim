@@ -144,7 +144,7 @@ public class Academy {
         return "Month: " +month+
 
                 "\n---\nNumber of centers: " +centerList.size()+
-                "Number of open centers: "+centerList.stream().filter(e -> !e.getClosed()).count()+
+                "\nNumber of open centers: "+centerList.stream().filter(e -> !e.getClosed()).count()+
                 "\nNumber of full centers: "+centerList.stream().filter(TrainingCenter::isFull).count()+
                 "\nNumber of closed centers: "+ centerList.stream().filter(TrainingCenter::getClosed).count() +
 

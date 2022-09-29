@@ -51,21 +51,21 @@ public boolean getClosed() {
 
     public static void openDoors() {
         int numOfTrainees = Randomizer.getRandom(0,50);
+        Iterator centers = Academy.centerList.iterator();
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().peek());
+            assgintoTraining(Trainee.getWaitingList().peek(),centers);
         }
     }
 
-    public static void assgintoTraining(Trainee trainee) {
-        Iterator var1 = Academy.centerList.iterator();
+    public static void assgintoTraining(Trainee trainee,Iterator centers) {
 
         TrainingCenter t;
         do {
-            if (!var1.hasNext()) {
+            if (!centers.hasNext()) {
                 return;
             }
 
-            t = (TrainingCenter)var1.next();
+            t = (TrainingCenter)centers.next();
         } while(t.isFull() || t.isClosed());
 
         t.getTraineeList().add(trainee);
