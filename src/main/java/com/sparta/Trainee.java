@@ -20,6 +20,9 @@ public class Trainee {
 	public int getId () {
 		return id;
 	}
+	public String getCourse () {
+		return courseName;
+	}
 
 	public static Deque<Trainee> getWaitingList() {
 		return waitingList;
