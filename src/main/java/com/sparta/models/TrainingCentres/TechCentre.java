@@ -5,8 +5,13 @@ import java.time.LocalDate;
 public class TechCentre extends TrainingCenter {
     private final int max=200;
     private final String courseName;
-    public TechCentre (String courseName) {
-        this.courseName = courseName;
+    public TechCentre (String cName) {
+        this.courseName = cName;
+        this.maxMonths = 1;
+    }
+
+    public String getCourseName() {
+        return courseName;
     }
 
     private int months = 0;
