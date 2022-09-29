@@ -8,7 +8,9 @@ import com.sparta.models.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
@@ -30,6 +32,8 @@ public class Academy {
         }
         return num;
     }
+
+
 
     public int getNumberOfFullCentres() {
         int num = 0;
@@ -67,12 +71,12 @@ public class Academy {
     }
 
     public void simulate(int months) {
+
         for(int i=1;i<=months;i++)
         {
             if(i%2==0)
             {
                 TrainingCentreFactory.generateTrainingCentre();
-
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
@@ -94,7 +98,7 @@ public class Academy {
             {
                 bootcampClosed++;
             }
-            else if(boot.getClass()== Bootcamp.class)
+            else if(boot instanceof Bootcamp)
             {
                 if (!boot.isFull()) {
                     bootcampOpen++;
@@ -113,7 +117,7 @@ public class Academy {
             {
                 techCentreClosed++;
             }
-            if(tech.getClass()== TechCentre.class)
+            if(tech instanceof TechCentre)
             {
                 if (!tech.isFull()) {
                     techCentreOpen++;
@@ -132,7 +136,7 @@ public class Academy {
             {
                 hubClosed++;
             }
-            if(hub.getClass() == TrainingHub.class)
+            if(hub instanceof TrainingHub)
             {
                 if (!hub.isFull()) {
                     hubOpen++;
@@ -197,17 +201,25 @@ public class Academy {
         }
 
         return "Month: " +month+
-                "\n---\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
-                "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
-                "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
-                "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
+                "\n---\nNumber of full centers: "+centerList.stream().filter(TrainingCenter::isFull).count()+
+                "\nNumber of open centers: "+centerList.stream().filter(e -> !e.getClosed()).count()+
+                "\nNumber of closed centers: "+ centerList.stream().filter(TrainingCenter::getClosed).count() +
+                "\n---\nNumber of open boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> !e.getClosed()).count() +
+                "\nNumber of full boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(TrainingCenter::isFull).count() +
+                "\nNumber of closed boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> e.isClosed()).count()+
+                "\n---\nNumbers of tech centres open: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.isClosed()).count()+
+                "\nNumbers of tech centres full: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isFull()).count()+
+                "\nNumbers of tech centres closed: "+centerList.stream().filter(e -> e instanceof TechCentre).filter(e -> e.isClosed()).count()+
+                "\n---\nNumbers of training hubs open: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.isClosed()).count()+
+                "\nNumber of training hubs full: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(e -> e.isFull()).count() +
+                "\nNumber of training hubs closed: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
-
-                "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
-                "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
-                "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
-                "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
-                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n"+
+//
+//                "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
+//                "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
+//                "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
+//                "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
+//                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n"+
                 "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting();
     }
     public String summaryOfSimulator()
