@@ -6,23 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
-    private int id;
+    private static int idIncrement = 0;
+    private final int id;
     private int numRequired;
     private String courseReq;
     public List<Trainee> ClientTraineeList = new ArrayList<>();
 public Client(String course){
     this.courseReq = course;
     this.numRequired = Randomizer.getRandom(15,100);
-    setId(id++);
+    this.id = idIncrement++;
 }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public int getNumRequired() {
         return numRequired;
@@ -33,4 +32,13 @@ public Client(String course){
         return courseReq;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", numRequired=" + numRequired +
+                ", courseReq='" + courseReq + '\'' +
+                ", ClientTraineeList=" + ClientTraineeList +
+                '}';
+    }
 }

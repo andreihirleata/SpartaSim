@@ -4,6 +4,7 @@ import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
 import com.sparta.models.TrainingCentres.TrainingHub;
+import com.sparta.models.TrainingCentres.factory.ClientFactory;
 import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
@@ -76,6 +77,12 @@ public class Academy {
             if(i%2==0)
             {
                 TrainingCentreFactory.generateTrainingCentre();
+            }
+            if(i%12==0)
+            {
+                System.out.println("Creating Client");
+               clientList.add( ClientFactory.generateClient());
+                System.out.println(clientList.toString());
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
