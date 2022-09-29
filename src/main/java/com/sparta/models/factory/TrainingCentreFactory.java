@@ -27,7 +27,6 @@ public class TrainingCentreFactory {
                     Academy.centerList.add(new TrainingHub());
                     counter++;
                 }
-                System.out.println(counter);
                 break;
             }
         }
