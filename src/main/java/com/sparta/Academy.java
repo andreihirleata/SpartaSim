@@ -10,6 +10,8 @@ import com.sparta.models.util.Courses;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.sparta.models.TrainingCentres.factory.ClientFactory.generateClient;
+
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
     public List<Client> clientList = new ArrayList<>();
@@ -76,6 +78,11 @@ public class Academy {
             if(i%2==0)
             {
                 TrainingCentreFactory.generateTrainingCentre();
+            }
+            if(i%12==0)
+            {
+                clientList.add(generateClient());
+
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
