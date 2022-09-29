@@ -1,6 +1,8 @@
 
 package com.sparta;
 
+import com.sparta.models.TrainingCentres.Bootcamp;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,5 +20,6 @@ public class Main {
         } else if (summaryOption == 2) {
             System.out.println(academy.summaryOfSimulator());
         }
+
     }
 }
