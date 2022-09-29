@@ -4,16 +4,15 @@ import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
 import com.sparta.models.TrainingCentres.TrainingHub;
-import com.sparta.models.factory.TrainingCentreFactory;
+import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
+    public List<Client> clientList = new ArrayList<>();
 
     int month = 0;
     int totalMonth = 0;
