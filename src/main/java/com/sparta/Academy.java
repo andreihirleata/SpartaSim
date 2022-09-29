@@ -4,6 +4,7 @@ import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
 import com.sparta.models.factory.TrainingCentreFactory;
+import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -140,19 +141,71 @@ public class Academy {
             }
         }
 
-        return "Month: "+month+"\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of closed centers: "+this.getNumberOfOpenCentres()+
-                "\nNumber of open boot camps: "
-                +bootcampOpen+"\nNumber of full boot camps: "
-                +bootcampFull+"\nNumber of closed boot camps: "
-                +bootcampClosed+"\nNumbers of tech centres open: "
-                +techCentreOpen+"\nNumbers of tech centres full: "
-                +techCentreFull+"\nNumbers of tech centres closed: "
-                +techCentreClosed+"\nNumbers of training hubs open: "
-                +hubOpen+"\nNumber of training hubs full: "
-                +hubFull+"\nNumber of training hubs closed: "
-                +hubClosed+"\nNumbers trainees in training: "
-                +this.getNumberOfTraineesTraining()+"\nNumber of trainees on the waiting list: "
-                +this.getNumberOfTraineesWaiting()+"\n";
+        int JavaTraining=0, JavaWaiting=0, CsharpTraining=0, CsharpWaiting=0, DataTraining=0, DataWaiting=0, DevOpsTraining=0, DevOpsWaiting=0, BusinessTraining = 0, BusinessWaiting = 0;
+
+        for(TrainingCenter tc:centerList)
+        {
+            for(Trainee t:tc.getTraineeList())
+            {
+                if(t.getCourse().equals(Courses.JAVA.getCourseName()))
+                {
+                    JavaTraining++;
+                }
+                else if(t.getCourse().equals(Courses.C_SHARP.getCourseName()))
+                {
+                    CsharpTraining++;
+                }
+                else if(t.getCourse().equals(Courses.DATA.getCourseName()))
+                {
+                    DataTraining++;
+                }
+                else if(t.getCourse().equals(Courses.BUSINESS.getCourseName()))
+                {
+                    BusinessTraining++;
+                }
+                else if(t.getCourse().equals(Courses.DEVOPS.getCourseName()))
+                {
+                    DevOpsTraining++;
+                }
+            }
+        }
+
+        for(Trainee t:Trainee.getWaitingList())
+        {
+            if(t.getCourse().equals(Courses.JAVA.getCourseName()))
+            {
+                JavaWaiting++;
+            }
+            else if(t.getCourse().equals(Courses.C_SHARP.getCourseName()))
+            {
+                CsharpWaiting++;
+            }
+            else if(t.getCourse().equals(Courses.DATA.getCourseName()))
+            {
+                DataWaiting++;
+            }
+            else if(t.getCourse().equals(Courses.BUSINESS.getCourseName()))
+            {
+                BusinessWaiting++;
+            }
+            else if(t.getCourse().equals(Courses.DEVOPS.getCourseName()))
+            {
+                DevOpsWaiting++;
+            }
+        }
+
+        return "Month: "+month+
+                "\n---\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of closed centers: "+this.getNumberOfOpenCentres()+
+                "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
+                "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
+                "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
+
+                "\n---\nNumbers trainees in training: "+this.getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +this.getNumberOfTraineesWaiting()+
+                "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
+                "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
+                "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
+                "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
+                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n";
     }
     public String summaryOfSimulator()
     {
