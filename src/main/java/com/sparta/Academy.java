@@ -3,6 +3,7 @@ package com.sparta;
 import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
+import com.sparta.models.TrainingCentres.TrainingHub;
 import com.sparta.models.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
@@ -75,6 +76,7 @@ public class Academy {
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
+            TrainingCenter.closeCenters();
             month++;
             System.out.println(this.toString());
         }
@@ -130,7 +132,7 @@ public class Academy {
             {
                 hubClosed++;
             }
-            if(hub.getClass()== TrainingCenter.class)
+            if(hub.getClass()== TrainingHub.class)
             {
                 if (hub.isFull() == false) {
                     hubOpen++;
@@ -195,12 +197,12 @@ public class Academy {
         }
 
         return "Month: "+month+
-                "\n---\nNumber of full centers: "+this.getNumberOfFullCentres()+"\nNumber of open centers: "+this.getNumberOfOpenCentres()+"\nNumber of closed centers: "+this.getNumberOfOpenCentres()+
+                "\n---\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
                 "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
                 "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
                 "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
 
-                "\n---\nNumbers trainees in training: "+this.getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +this.getNumberOfTraineesWaiting()+
+                "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
                 "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
                 "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
