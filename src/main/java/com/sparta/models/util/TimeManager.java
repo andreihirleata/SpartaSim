@@ -26,9 +26,9 @@ public class TimeManager {
 		return startDate.plusMonths(dateStarted);
 	}
 
-	public LocalDate getEndDate (int courseDuration) {
-		return endDate.plusMonths(courseDuration);
-	}
+
+	public static LocalDate getEndDate (int courseDuration) {return endDate.plusMonths(courseDuration);}
+
 
 	public boolean courseRunning() {
 		return monthsPassed.isBefore(endDate);

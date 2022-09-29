@@ -1,6 +1,6 @@
 package com.sparta;
 
-import com.sparta.models.factory.TraineeFactory;
+import com.sparta.models.TrainingCentres.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
