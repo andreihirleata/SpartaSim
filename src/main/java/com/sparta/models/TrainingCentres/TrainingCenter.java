@@ -6,22 +6,21 @@ import com.sparta.Trainee;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 public abstract class TrainingCenter {
-
-
-    public  int maxMonths;
     private static int centerID =0;
     private  List<Trainee> traineeList = new ArrayList<>();
+
 
     private  boolean closed = false;
 
     public void setClosed(boolean closed) {
         this.closed = closed;
     }
-    public boolean getClosed() {
+public boolean getClosed() {
         return this.closed;
 }
     public  List<Trainee> getTraineeList() {
@@ -43,32 +42,31 @@ public abstract class TrainingCenter {
     public int getMonthsRunning() {
         return monthsRunning;
     }
-
     public int getCenterID() {return centerID;}
+    public boolean isClosed() {return closed;}
 
     public void setCenterID(int centerID) {
         this.centerID = centerID;
     }
 
-
     public static void openDoors() {
         int numOfTrainees = Randomizer.getRandom(0,50);
+        Iterator centers = Academy.centerList.iterator();
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().peek());
+            assgintoTraining(Trainee.getWaitingList().peek(),centers);
         }
     }
 
-    public static void assgintoTraining(Trainee trainee) {
-        Iterator var1 = Academy.centerList.iterator();
+    public static void assgintoTraining(Trainee trainee,Iterator centers) {
 
         TrainingCenter t;
         do {
-            if (!var1.hasNext()) {
+            if (!centers.hasNext()) {
                 return;
             }
 
-            t = (TrainingCenter)var1.next();
-        } while(t.isFull() || t.getClosed());
+            t = (TrainingCenter)centers.next();
+        } while(t.isFull() || t.isClosed());
 
         t.getTraineeList().add(trainee);
         Trainee.getWaitingList().remove(trainee);
@@ -76,15 +74,14 @@ public abstract class TrainingCenter {
 
     public static void closeCenters() {
         for(TrainingCenter tc:Academy.centerList) {
-
+            if (tc.getMonthsRunning() >= 1) {
                 if (tc.getTraineeList().size() < 25) {
-                    if (tc.getMonthsRunning() >= tc.maxMonths) {
                     for (Trainee t : tc.getTraineeList()) {
                         Trainee.getWaitingList().addFirst(t);
                     }
                     tc.setClosed(true);
                     tc.getTraineeList().clear();
-                } else tc.setMonthsRunning(0);
+                }
             }
             tc.setMonthsRunning(tc.getMonthsRunning() + 1);
         }
