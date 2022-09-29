@@ -8,7 +8,9 @@ import com.sparta.models.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
@@ -16,6 +18,10 @@ public class Academy {
 
     int month = 0;
     int totalMonth = 0;
+
+    public void addCenter(TrainingCenter center) {
+        centerList.add(center);
+    }
 
     public int getNumberOfOpenCentres() {
         int num = 0;
@@ -28,6 +34,8 @@ public class Academy {
         return num;
     }
 
+
+
     public int getNumberOfFullCentres() {
         int num = 0;
         for(TrainingCenter t:centerList)
@@ -35,6 +43,14 @@ public class Academy {
             if (t.isFull()) {
                 num++;
             }
+        }
+        return num;
+    }
+    public int getNumberOfClosedCentres() {
+        int num = 0;
+        for(TrainingCenter t:centerList)
+        {
+            num++;
         }
         return num;
     }
@@ -53,71 +69,24 @@ public class Academy {
     }
 
     public void simulate(int months) {
+
         for(int i=1;i<=months;i++)
         {
             if(i%2==0)
             {
                 TrainingCentreFactory.generateTrainingCentre();
-
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
             month++;
-            System.out.println(this);
+            System.out.println(this.toString());
         }
     }
 
     @Override
     public String toString()
     {
-        int bootcampOpen = 0,bootcampClosed = 0,bootcampFull = 0,techCentreOpen = 0,techCentreClosed = 0,techCentreFull = 0,hubOpen = 0,hubClosed = 0,hubFull = 0;
-        for(TrainingCenter center:centerList)
-        {
-            if(center.getClass()== Bootcamp.class)
-            {
-                if (!center.isFull()) {
-                    bootcampOpen++;
-                }
-                else{
-                    bootcampFull++;
-                }
-            }
-            if(center.getClass()== TechCentre.class)
-            {
-                if (!center.isFull()) {
-                    techCentreOpen++;
-                }
-                else{
-                    techCentreFull++;
-                }
-            }
-            if(center.getClass()== TrainingHub.class)
-            {
-                if (!center.isFull()) {
-                    hubOpen++;
-                }
-                else{
-                    hubFull++;
-                }
-            }
-        }
-
-        for(TrainingCenter center:closedCenterList)
-        {
-            if(center.getClass()== Bootcamp.class)
-            {
-                bootcampClosed++;
-            }
-            if(center.getClass()== TechCentre.class)
-            {
-                techCentreClosed++;
-            }
-            if(center.getClass()== TrainingHub.class)
-            {
-                hubClosed++;
-            }
-        }
 
         int JavaTraining=0, JavaWaiting=0, CsharpTraining=0, CsharpWaiting=0, DataTraining=0, DataWaiting=0, DevOpsTraining=0, DevOpsWaiting=0, BusinessTraining = 0, BusinessWaiting = 0;
 
@@ -172,20 +141,35 @@ public class Academy {
             }
         }
 
-        int numTrainees = getNumberOfTraineesWaiting()+getNumberOfTraineesTraining();
+        int totalCenters = closedCenterList.size()+centerList.size();
 
-        return "Month: "+month+
-                "\n---\nNumber of centers: "+centerList.size()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of closed centers: "+closedCenterList.size()+
-                "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
-                "\n---\nNumber of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
-                "\n---\nNumber of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
+        return "Month: " +month+
+                "\n---\nNumber of centers: " +totalCenters+
+                "\nNumber of open centers: "+centerList.stream().filter(e -> !e.isFull()).count()+
+                "\nNumber of full centers: "+centerList.stream().filter(TrainingCenter::isFull).count()+
+                "\nNumber of closed centers: "+ closedCenterList.size() +
 
-                "\n---\nNumber of trainees: "+numTrainees+"\nNumber trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
+                "\n---\nNumber of open boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(e -> !e.isFull()).count() +
+                "\nNumber of full boot camps: " +centerList.stream().filter(e -> e instanceof Bootcamp).filter(TrainingCenter::isFull).count() +
+                "\nNumber of closed boot camps: " +closedCenterList.stream().filter(e -> e instanceof Bootcamp).count()+
+
+                "\n---\nNumber of tech open centres: " +centerList.stream().filter(e-> e instanceof TechCentre).filter(e -> !e.isFull()).count()+
+                "\nNumber of tech full centres: " + centerList.stream().filter(e -> e instanceof TechCentre).filter(TrainingCenter::isFull).count()+
+                "\nNumber of tech closed centres: "+closedCenterList.stream().filter(e -> e instanceof TechCentre).count()+
+
+                "\n---\nNumber of training open hubs: " +centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> !e.isFull()).count()+
+                "\nNumber of training full hubs: " +centerList.stream().filter(e -> e instanceof  TrainingHub).filter(TrainingCenter::isFull).count() +
+                "\nNumber of training closed hubs: " +closedCenterList.stream().filter(e -> e instanceof TechCentre).count() +
+
+
+                "\n---\nNumber of trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
                 "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
                 "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
                 "\n---\nNumber of DevOps trainees in training: "+DevOpsTraining+"\nNumber of DevOps trainees waiting: " +DevOpsWaiting+
-                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n\n";
+                "\n---\nNumber of Business trainees in training: "+BusinessTraining+"\nNumber of Business trainees waiting: " +BusinessWaiting+"\n";
+
     }
     public String summaryOfSimulator()
     {
