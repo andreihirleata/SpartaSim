@@ -12,6 +12,7 @@ import java.util.List;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
+    public static List<TrainingCenter> closedCenterList = new ArrayList<>();
 
     int month = 0;
     int totalMonth = 0;
@@ -24,7 +25,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == false && t.closed==false) {
+            if (t.isFull() == false) {
                 num++;
             }
         }
@@ -35,18 +36,7 @@ public class Academy {
         int num = 0;
         for(TrainingCenter t:centerList)
         {
-            if (t.isFull() == true && t.closed==false) {
-                num++;
-            }
-        }
-        return num;
-    }
-    public int getNumberOfClosedCentres() {
-        int num = 0;
-        for(TrainingCenter t:centerList)
-        {
-            if(t.closed==true)
-            {
+            if (t.isFull() == true) {
                 num++;
             }
         }
@@ -85,61 +75,51 @@ public class Academy {
     @Override
     public String toString()
     {
-        int bootcampOpen = 0;
-        int bootcampClosed = 0;
-        int bootcampFull = 0;
-        for(TrainingCenter boot:centerList)
+        int bootcampOpen = 0,bootcampClosed = 0,bootcampFull = 0,techCentreOpen = 0,techCentreClosed = 0,techCentreFull = 0,hubOpen = 0,hubClosed = 0,hubFull = 0;
+        for(TrainingCenter center:centerList)
         {
-            if(boot.closed==true)
+            if(center.getClass()== Bootcamp.class)
             {
-                bootcampClosed++;
-            }
-            else if(boot.getClass()== Bootcamp.class)
-            {
-                if (boot.isFull() == false) {
+                if (center.isFull() == false) {
                     bootcampOpen++;
                 }
                 else{
                     bootcampFull++;
                 }
             }
-        }
-        int techCentreOpen = 0;
-        int techCentreClosed = 0;
-        int techCentreFull = 0;
-        for(TrainingCenter tech:centerList)
-        {
-            if(tech.closed==true)
+            if(center.getClass()== TechCentre.class)
             {
-                techCentreClosed++;
-            }
-            if(tech.getClass()== TechCentre.class)
-            {
-                if (tech.isFull() == false) {
+                if (center.isFull() == false) {
                     techCentreOpen++;
                 }
                 else{
                     techCentreFull++;
                 }
             }
-        }
-        int hubOpen = 0;
-        int hubClosed = 0;
-        int hubFull = 0;
-        for(TrainingCenter hub:centerList)
-        {
-            if(hub.closed==true)
+            if(center.getClass()== TrainingHub.class)
             {
-                hubClosed++;
-            }
-            if(hub.getClass()== TrainingHub.class)
-            {
-                if (hub.isFull() == false) {
+                if (center.isFull() == false) {
                     hubOpen++;
                 }
                 else{
                     hubFull++;
                 }
+            }
+        }
+
+        for(TrainingCenter center:closedCenterList)
+        {
+            if(center.getClass()== Bootcamp.class)
+            {
+                bootcampClosed++;
+            }
+            if(center.getClass()== TechCentre.class)
+            {
+                techCentreClosed++;
+            }
+            if(center.getClass()== TrainingHub.class)
+            {
+                hubClosed++;
             }
         }
 
@@ -196,13 +176,15 @@ public class Academy {
             }
         }
 
-        return "Month: "+month+
-                "\n---\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
-                "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
-                "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
-                "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
+        int numTrainees = getNumberOfTraineesWaiting()+getNumberOfTraineesTraining();
 
-                "\n---\nNumbers trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
+        return "Month: "+month+
+                "\n---\nNumber of centers: "+centerList.size()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of closed centers: "+closedCenterList.size()+
+                "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
+                "\n---\nNumber of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
+                "\n---\nNumber of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
+
+                "\n---\nNumber of trainees: "+numTrainees+"\nNumber trainees in training: "+getNumberOfTraineesTraining()+"\nNumber of trainees waiting: " +getNumberOfTraineesWaiting()+
                 "\n---\nNumber of Java trainees in training: "+JavaTraining+"\nNumber of Java trainees waiting: "+JavaWaiting+
                 "\n---\nNumber of C# trainees in training: "+CsharpTraining+"\nNumber of C# trainees waiting: " +CsharpWaiting+
                 "\n---\nNumber of Data trainees in training: "+DataTraining+"\nNumber of Data trainees waiting: " +DataWaiting+
