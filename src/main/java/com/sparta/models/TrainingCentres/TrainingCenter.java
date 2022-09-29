@@ -12,8 +12,16 @@ import java.util.List;
 public abstract class TrainingCenter {
     private static int centerID =0;
     private  List<Trainee> traineeList = new ArrayList<>();
-    public static boolean closed = false;
 
+
+    private  boolean closed = false;
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+public boolean getClosed() {
+        return this.closed;
+}
     public  List<Trainee> getTraineeList() {
         return traineeList;
     }
@@ -24,6 +32,15 @@ public abstract class TrainingCenter {
 
     public abstract boolean isFull();
 
+    public void setMonthsRunning(int monthsRunning) {
+        this.monthsRunning = monthsRunning;
+    }
+
+    private int monthsRunning = 0;
+
+    public int getMonthsRunning() {
+        return monthsRunning;
+    }
     public int getCenterID() {return centerID;}
     public boolean isClosed() {return closed;}
 
@@ -50,21 +67,22 @@ public abstract class TrainingCenter {
             t = (TrainingCenter)var1.next();
         } while(t.isFull() || t.isClosed());
 
-        getTraineeList().add(trainee);
+        t.getTraineeList().add(trainee);
         Trainee.getWaitingList().remove(trainee);
     }
 
     public static void closeCenters() {
-        for(TrainingCenter tc:Academy.centerList)
-        {
-            if(tc.getTraineeList().size()<25)
-            {
-                for(Trainee t:tc.getTraineeList()) {
-                    Trainee.getWaitingList().addFirst(t);
+        for(TrainingCenter tc:Academy.centerList) {
+            if (tc.getMonthsRunning() >= 1) {
+                if (tc.getTraineeList().size() < 25) {
+                    for (Trainee t : tc.getTraineeList()) {
+                        Trainee.getWaitingList().addFirst(t);
+                    }
+                    tc.setClosed(true);
+                    tc.getTraineeList().clear();
                 }
-                tc.closed = true;
-                tc.getTraineeList().clear();
             }
+            tc.setMonthsRunning(tc.getMonthsRunning() + 1);
         }
     }
 
