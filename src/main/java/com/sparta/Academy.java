@@ -197,7 +197,7 @@ public class Academy {
         }
 
         return "Month: "+month+
-                "\n---\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
+                "\n---\nNumber of open centers: "+getNumberOfOpenCentres()+"\nNumber of full centers: "+getNumberOfFullCentres()+"\nNumber of closed centers: "+getNumberOfOpenCentres()+
                 "\n---\nNumber of open boot camps: " +bootcampOpen+"\nNumber of full boot camps: " +bootcampFull+"\nNumber of closed boot camps: " +bootcampClosed+
                 "\n---\nNumbers of tech centres open: " +techCentreOpen+"\nNumbers of tech centres full: " +techCentreFull+"\nNumbers of tech centres closed: "+techCentreClosed+
                 "\n---\nNumbers of training hubs open: " +hubOpen+"\nNumber of training hubs full: " +hubFull+"\nNumber of training hubs closed: " +hubClosed+
