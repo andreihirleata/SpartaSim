@@ -3,11 +3,13 @@ package com.sparta.models.TrainingCentres;
 import com.sparta.Academy;
 import com.sparta.Trainee;
 
+import com.sparta.models.util.Courses;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public abstract class TrainingCenter {
     private static int centerID =0;
@@ -50,14 +52,14 @@ public boolean getClosed() {
 
     public static void openDoors() {
         int numOfTrainees = Randomizer.getRandom(0,50);
-        Iterator centers = Academy.centerList.iterator();
+        Iterator<TrainingCenter> centers = Academy.centerList.iterator();
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().peek());
+            assignIntoTraining(Trainee.getWaitingList().peek());
         }
     }
 
-    public static void assgintoTraining(Trainee trainee) {
-        Iterator centers = Academy.centerList.iterator();
+    public static void assignIntoTraining(Trainee trainee) {
+        Iterator<TrainingCenter> centers = Academy.centerList.iterator();
         TrainingCenter t;
         do {
             if (!centers.hasNext()) {
@@ -65,8 +67,9 @@ public boolean getClosed() {
             }
             t = (TrainingCenter)centers.next();
         } while(t.isFull() || t.isClosed());
-    t.getTraineeList().add(trainee);
-    Trainee.getWaitingList().remove(trainee);
+            t.getTraineeList().add(trainee);
+            Trainee.getWaitingList().remove(trainee);
+
     }
 
     public static void closeCenters() {

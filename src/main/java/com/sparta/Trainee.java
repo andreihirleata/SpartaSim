@@ -5,6 +5,7 @@ import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.Objects;
 
 public class Trainee {
 	private final String courseName;
@@ -26,6 +27,15 @@ public class Trainee {
 
 	public static Deque<Trainee> getWaitingList() {
 		return waitingList;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Trainee{" +
+				"courseName='" + courseName + '\'' +
+				", id=" + id +
+				'}';
 	}
 
 	public static void generateTrainees() {
