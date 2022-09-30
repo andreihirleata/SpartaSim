@@ -53,6 +53,8 @@ public boolean getClosed() {
         Iterator centers = Academy.centerList.iterator();
         for (int i = 0; i < numOfTrainees; i++) {
             assgintoTraining(Trainee.getWaitingList().peek());
+            Trainee.setMonthsTrained(Trainee.getMonthsTrained()+1);
+            System.out.println(Trainee.getMonthsTrained());
         }
     }
 

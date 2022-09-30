@@ -10,6 +10,9 @@ public class Trainee {
 	private final String courseName;
 	private static int idIncrement = 0;
 	private final int id;
+
+	private int monthsTrained = 0;
+
 	private static Deque<Trainee> waitingList = new ArrayDeque<>();
 
 	public Trainee (String courseName) {
