@@ -21,8 +21,8 @@ public class Bootcamp extends TrainingCenter {
         return elapsed.isAfter(startDate) && getTraineeList().size() < 25;
     }
 
-    public Bootcamp() {
-        this.maxMonths = 3;
+    public Bootcamp(){
+
     }
 
     @Override

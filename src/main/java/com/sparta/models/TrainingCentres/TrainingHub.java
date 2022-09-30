@@ -4,7 +4,6 @@ public class TrainingHub extends TrainingCenter {
     private final int max=100;
 
     public TrainingHub() {
-        this.maxMonths = 1;
     }
 
     @Override

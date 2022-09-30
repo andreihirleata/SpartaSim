@@ -6,7 +6,6 @@ import com.sparta.Trainee;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -67,9 +66,10 @@ public boolean getClosed() {
 
             t = (TrainingCenter)centers.next();
         } while(t.isFull() || t.isClosed());
-
-        t.getTraineeList().add(trainee);
-        Trainee.getWaitingList().remove(trainee);
+//if(!(t instanceof TechCentre) || ((TechCentre) t).getCourseName() == trainee.getCourse()) {
+    t.getTraineeList().add(trainee);
+    Trainee.getWaitingList().remove(trainee);
+//}
     }
 
     public static void closeCenters() {
