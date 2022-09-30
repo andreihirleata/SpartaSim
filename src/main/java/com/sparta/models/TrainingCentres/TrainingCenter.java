@@ -52,24 +52,21 @@ public boolean getClosed() {
         int numOfTrainees = Randomizer.getRandom(0,50);
         Iterator centers = Academy.centerList.iterator();
         for (int i = 0; i < numOfTrainees; i++) {
-            assgintoTraining(Trainee.getWaitingList().peek(),centers);
+            assgintoTraining(Trainee.getWaitingList().peek());
         }
     }
 
-    public static void assgintoTraining(Trainee trainee,Iterator centers) {
-
+    public static void assgintoTraining(Trainee trainee) {
+        Iterator centers = Academy.centerList.iterator();
         TrainingCenter t;
         do {
             if (!centers.hasNext()) {
                 return;
             }
-
             t = (TrainingCenter)centers.next();
         } while(t.isFull() || t.isClosed());
-//if(!(t instanceof TechCentre) || ((TechCentre) t).getCourseName() == trainee.getCourse()) {
     t.getTraineeList().add(trainee);
     Trainee.getWaitingList().remove(trainee);
-//}
     }
 
     public static void closeCenters() {
