@@ -11,7 +11,9 @@ public class Trainee {
 	private static int idIncrement = 0;
 	private final int id;
 
-	private int monthsTrained = 0;
+
+	public static int MonthsTrained = 0;
+	public static boolean isTraining;
 
 	private static Deque<Trainee> waitingList = new ArrayDeque<>();
 
@@ -19,6 +21,7 @@ public class Trainee {
 		this.courseName = courseName;
 		this.id = idIncrement++;
 	}
+
 
 	public int getId () {
 		return id;
