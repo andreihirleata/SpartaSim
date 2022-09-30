@@ -79,6 +79,10 @@ public class Academy {
                 clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
             }
+            if(Trainee.isTraining = true){
+                Trainee.MonthsTrained++;
+            }
+
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
