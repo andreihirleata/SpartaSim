@@ -3,13 +3,11 @@ package com.sparta.models.TrainingCentres;
 import com.sparta.Academy;
 import com.sparta.Trainee;
 
-import com.sparta.models.util.Courses;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 public abstract class TrainingCenter {
     private static int centerID =0;
@@ -51,38 +49,31 @@ public boolean getClosed() {
     }
 
     public static void openDoors() {
-        int numOfTrainees = Randomizer.getRandom(0,50);
-        Iterator<TrainingCenter> centers = Academy.centerList.iterator();
-        for (int i = 0; i < numOfTrainees; i++) {
-            assignIntoTraining(Trainee.getWaitingList().peek());
+        for(TrainingCenter trainingcenter:Academy.centerList) {
+            int numOfTrainees = Randomizer.getRandom(0, 50);
+            for (int i = 0; i < numOfTrainees; i++) {
+                assgintoTraining(Trainee.getWaitingList().peek(),trainingcenter);
+            }
         }
     }
 
-    public static void assignIntoTraining(Trainee trainee) {
-        Iterator<TrainingCenter> centers = Academy.centerList.iterator();
-        TrainingCenter t;
-        do {
-            if (!centers.hasNext()) {
-                return;
-            }
-            t = (TrainingCenter)centers.next();
-        } while(t.isFull() || t.isClosed());
-            t.getTraineeList().add(trainee);
+    public static void assgintoTraining(Trainee trainee,TrainingCenter trainingcenter) {
+        if(!trainingcenter.isFull() && !trainingcenter.isClosed())
+        {
+            trainingcenter.getTraineeList().add(trainee);
             Trainee.getWaitingList().remove(trainee);
-
+        }
     }
 
     public static void closeCenters() {
         for(TrainingCenter tc:Academy.centerList) {
-            if (tc.getMonthsRunning() >= 1) {
-                if (tc.getTraineeList().size() < 25) {
-                    for (Trainee t : tc.getTraineeList()) {
-                        Trainee.getWaitingList().addFirst(t);
+            if (tc.getMonthsRunning() >= 1 && tc.getTraineeList().size() < 25) {
+                for (Trainee t : tc.getTraineeList()) {
+                    Trainee.getWaitingList().addFirst(t);
                     }
                     tc.setClosed(true);
                     tc.getTraineeList().clear();
                 }
-            }
             tc.setMonthsRunning(tc.getMonthsRunning() + 1);
         }
     }
