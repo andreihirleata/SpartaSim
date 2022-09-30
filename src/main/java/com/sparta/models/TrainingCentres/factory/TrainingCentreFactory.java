@@ -18,11 +18,9 @@ public class TrainingCentreFactory {
                 } else generateTrainingCentre();
             } break;
             case 2:  {
-                int counter = 0;
                 int rand = Randomizer.getRandom(1,3);
                 for (int i = 0; i < rand; i++) {
                     Academy.centerList.add(new TrainingHub());
-                    counter++;
                 }
                 break;
             }
