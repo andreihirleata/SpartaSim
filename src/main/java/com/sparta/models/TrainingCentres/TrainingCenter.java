@@ -13,7 +13,15 @@ public abstract class TrainingCenter {
     private static int centerID =0;
     private  List<Trainee> traineeList = new ArrayList<>();
 
+    public int getMaxMonths() {
+        return maxMonths;
+    }
 
+    public void setMaxMonths(int maxMonths) {
+        this.maxMonths = maxMonths;
+    }
+
+    public int maxMonths;
     private  boolean closed = false;
 
     public void setClosed(boolean closed) {
@@ -71,14 +79,15 @@ public boolean getClosed() {
 
     public static void closeCenters() {
         for(TrainingCenter tc:Academy.centerList) {
-            if (tc.getMonthsRunning() >= 1) {
+
+            if (tc.getMonthsRunning() >= tc.getMaxMonths()) {
                 if (tc.getTraineeList().size() < 25) {
                     for (Trainee t : tc.getTraineeList()) {
                         Trainee.getWaitingList().addFirst(t);
                     }
                     tc.setClosed(true);
                     tc.getTraineeList().clear();
-                }
+                } else tc.setMonthsRunning(0);
             }
             tc.setMonthsRunning(tc.getMonthsRunning() + 1);
         }

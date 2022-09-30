@@ -7,6 +7,7 @@ public class TechCentre extends TrainingCenter {
     private final int max=200;
     private final String courseName;
     public TechCentre (String cName) {
+        this.maxMonths = 1;
         this.courseName = cName;
     }
 
@@ -23,6 +24,8 @@ public class TechCentre extends TrainingCenter {
     public boolean closeCourse() {
         return startDate.isBefore(endDate) || startDate.equals(endDate);
     }
+
+
 
     public void closureCheck() {
         if(startDate.isBefore(endDate) && getTraineeList().size() < 25) {

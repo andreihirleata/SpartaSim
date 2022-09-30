@@ -22,7 +22,7 @@ public class Bootcamp extends TrainingCenter {
     }
 
     public Bootcamp(){
-
+        this.maxMonths = 3;
     }
 
     @Override
