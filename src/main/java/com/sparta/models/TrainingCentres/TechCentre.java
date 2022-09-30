@@ -7,7 +7,6 @@ public class TechCentre extends TrainingCenter {
     private final String courseName;
     public TechCentre (String cName) {
         this.courseName = cName;
-        this.maxMonths = 1;
     }
 
     public String getCourseName() {
