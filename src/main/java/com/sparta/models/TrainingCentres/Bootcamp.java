@@ -26,6 +26,10 @@ public class Bootcamp extends TrainingCenter {
         return startDate.isAfter(clientPlacementDate) || startDate.isEqual(clientPlacementDate);
     }
 
+    public Bootcamp(){
+
+    }
+
     @Override
     public boolean isFull() {
         return getTraineeList().size() >= max;

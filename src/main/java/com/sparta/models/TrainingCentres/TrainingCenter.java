@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+
 public abstract class TrainingCenter implements Iterable<Trainee>{
 	private static int centerID = 0;
 	private List<Trainee> traineeList = new ArrayList<>();
@@ -113,6 +114,7 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 				"centerID=" + centerID +
 				'}';
 	}
+
 
 
 }

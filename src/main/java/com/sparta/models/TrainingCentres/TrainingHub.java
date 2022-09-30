@@ -19,6 +19,9 @@ public class TrainingHub extends TrainingCenter {
         return months == 1 && getTraineeList().size() <= 25;
     }
 
+    public TrainingHub() {
+    }
+
     @Override
     public boolean isFull() {
         return getTraineeList().size() >= max;

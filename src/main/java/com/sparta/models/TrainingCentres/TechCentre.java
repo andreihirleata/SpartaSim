@@ -8,10 +8,12 @@ import java.util.function.Consumer;
 
 public class TechCentre extends TrainingCenter {
     private final int max=200;
+
     private final String COURSE_NAME;
 
     public TechCentre (String courseName) {
         this.COURSE_NAME = courseName;
+
     }
 
     private int months = 0;
