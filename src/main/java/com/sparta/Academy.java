@@ -8,10 +8,13 @@ import com.sparta.models.TrainingCentres.factory.ClientFactory;
 import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class Academy {
+    private static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
     public List<Client> clientList = new ArrayList<>();
 
@@ -76,6 +79,10 @@ public class Academy {
                 clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
             }
+            if(Trainee.isTraining = true){
+                Trainee.MonthsTrained++;
+            }
+
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
