@@ -4,13 +4,12 @@ import com.sparta.models.TrainingCentres.Bootcamp;
 import com.sparta.models.TrainingCentres.TechCentre;
 import com.sparta.models.TrainingCentres.TrainingCenter;
 import com.sparta.models.TrainingCentres.TrainingHub;
+import com.sparta.models.TrainingCentres.factory.ClientFactory;
 import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.sparta.models.TrainingCentres.factory.ClientFactory.generateClient;
 
 public class Academy {
     public static List<TrainingCenter> centerList = new ArrayList<>();
@@ -81,8 +80,9 @@ public class Academy {
             }
             if(i%12==0)
             {
-                clientList.add(generateClient());
-
+                System.out.println("Creating Client");
+               clientList.add( ClientFactory.generateClient());
+                System.out.println(clientList.toString());
             }
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
