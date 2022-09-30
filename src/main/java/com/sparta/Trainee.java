@@ -13,12 +13,18 @@ public class Trainee implements Iterable<Trainee>{
 	private final String courseName;
 	private static int idIncrement = 0;
 	private final int id;
+
+
+	public static int MonthsTrained = 0;
+	public static boolean isTraining;
+
 	private static Deque<Trainee> waitingList = new ArrayDeque<>();
 
 	public Trainee (String courseName) {
 		this.courseName = courseName;
 		this.id = idIncrement++;
 	}
+
 
 	public int getId () {
 		return id;

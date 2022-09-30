@@ -62,6 +62,7 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
 		for (int i = 0; i < numOfTrainees; i++) {
 			assgintoTraining(Trainee.getWaitingList().peek());
+			Trainee.isTraining = true;
 		}
 	}
 
