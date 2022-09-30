@@ -21,6 +21,10 @@ public class Bootcamp extends TrainingCenter {
         return elapsed.isAfter(startDate) && getTraineeList().size() < 25;
     }
 
+    public Bootcamp(){
+
+    }
+
     @Override
     public boolean isFull() {
         return getTraineeList().size() >= max;
