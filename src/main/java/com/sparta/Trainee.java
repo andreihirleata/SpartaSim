@@ -40,7 +40,7 @@ public class Trainee implements Iterable<Trainee>{
 	}
 
 	public static void generateTrainees () {
-		int numOfTrainees = Randomizer.getRandom(0, 50);
+		int numOfTrainees = Randomizer.getRandom(50, 100);
 		for (int i = 0; i <= numOfTrainees; i++) {
 			Trainee trainee = TraineeFactory.generateTrainee();
 			getWaitingList().add(trainee);

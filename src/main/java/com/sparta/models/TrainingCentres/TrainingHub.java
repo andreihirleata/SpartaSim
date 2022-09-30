@@ -20,7 +20,6 @@ public class TrainingHub extends TrainingCenter {
     }
 
     public TrainingHub() {
-        this.maxMonths = 1;
     }
 
     @Override

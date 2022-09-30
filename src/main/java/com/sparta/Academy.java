@@ -90,6 +90,9 @@ public class Academy {
 
         for (TrainingCenter tc : centerList) {
             for (Trainee t : tc.getTraineeList()) {
+                if(t == null) {
+                    continue;
+                }
                 if (t.getCourse().equals(Courses.JAVA.getCourseName())) {
                     JavaTraining++;
                 } else if (t.getCourse().equals(Courses.C_SHARP.getCourseName())) {
@@ -105,6 +108,9 @@ public class Academy {
         }
 
         for (Trainee t : Trainee.getWaitingList()) {
+            if(t == null) {
+                continue;
+            }
             if (t.getCourse().equals(Courses.JAVA.getCourseName())) {
                 JavaWaiting++;
             } else if (t.getCourse().equals(Courses.C_SHARP.getCourseName())) {
