@@ -1,24 +1,29 @@
 package com.sparta.models.TrainingCentres;
 
+import com.sparta.Trainee;
+
 import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.function.Consumer;
 
 public class Bootcamp extends TrainingCenter {
     private final int max=500;
-    private int months = 0;
+    private int months;
     private LocalDate startDate = LocalDate.now();
-    private LocalDate endDate = LocalDate.now().plusMonths(3);
-
-
-    public boolean closeCourse() {
-        return startDate.isBefore(endDate) || startDate.equals(endDate);
-    }
+    private LocalDate clientPlacementDate = startDate.plusMonths(3);
 
     public boolean closureCheck(int monthsRunning) {
-        LocalDate elapsed = startDate.plusMonths(monthsRunning);
-        if(elapsed.isBefore(endDate) && getTraineeList().size() > 25) {
-            elapsed = LocalDate.now();
+        if(months < 3 && getTraineeList().size() >= 25) {
+            months = 0;
+            System.out.println("months post reset: " + months);
         }
-        return elapsed.isAfter(startDate) && getTraineeList().size() < 25;
+        months++;
+        System.out.println("Testing months: " + months);
+        return months == 3 && getTraineeList().size() < 25;
+    }
+
+    public boolean clientPlacementCheck() {
+        return startDate.isAfter(clientPlacementDate) || startDate.isEqual(clientPlacementDate);
     }
 
     @Override
@@ -26,25 +31,16 @@ public class Bootcamp extends TrainingCenter {
         return getTraineeList().size() >= max;
     }
 
-    @Override
-    public String toString () {
-        return "Bootcamp{" +
-                "max=" + max +
-                ", months=" + months +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                '}';
-    }
 
     @Override
     public boolean equals (Object o) {
         if (this == o) return true;
-        if (!(o instanceof Bootcamp bootcamp)) return false;
+        if (!(o instanceof Bootcamp trainees)) return false;
 
-        if (max != bootcamp.max) return false;
-        if (months != bootcamp.months) return false;
-        if (!startDate.equals(bootcamp.startDate)) return false;
-        return endDate.equals(bootcamp.endDate);
+        if (max != trainees.max) return false;
+        if (months != trainees.months) return false;
+        if (!startDate.equals(trainees.startDate)) return false;
+        return clientPlacementDate.equals(trainees.clientPlacementDate);
     }
 
     @Override
@@ -52,7 +48,21 @@ public class Bootcamp extends TrainingCenter {
         int result = max;
         result = 31 * result + months;
         result = 31 * result + startDate.hashCode();
-        result = 31 * result + endDate.hashCode();
         return result;
+    }
+
+    @Override
+    public Iterator<Trainee> iterator () {
+        return new Iterator<Trainee>() {
+            @Override
+            public boolean hasNext () {
+                return false;
+            }
+
+            @Override
+            public Trainee next () {
+                return null;
+            }
+        };
     }
 }
