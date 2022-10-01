@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TimeManagerTest {
-
+	TimeManager TimeManager = new TimeManager();
 	@Test
 	void getMonthsPassed () {
 		for(int i = 1; i < 10; i++) {
