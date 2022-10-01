@@ -3,10 +3,9 @@ package com.sparta.models.util;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Time;
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 
 class TimeManagerTest {
 	TimeManager TimeManager = new TimeManager();

@@ -4,19 +4,15 @@ import com.sparta.models.TrainingCentres.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.function.Consumer;
 
 public class Trainee implements Iterable<Trainee>{
 	private final String courseName;
 	private static int idIncrement = 0;
 	private final int id;
 
-
-	public static int MonthsTrained = 0;
-	public static boolean isTraining;
+	private int monthsTrained = 0;
 
 	private static Deque<Trainee> waitingList = new ArrayDeque<>();
 
@@ -24,7 +20,13 @@ public class Trainee implements Iterable<Trainee>{
 		this.courseName = courseName;
 		this.id = idIncrement++;
 	}
+	public  int getMonthsTrained() {
+		return this.monthsTrained;
+	}
 
+	public  void setMonthsTrained(int monthsTrained) {
+		this.monthsTrained = monthsTrained;
+	}
 
 	public int getId () {
 		return id;
@@ -46,7 +48,7 @@ public class Trainee implements Iterable<Trainee>{
 	}
 
 	public static void generateTrainees () {
-		int numOfTrainees = Randomizer.getRandom(0, 50);
+		int numOfTrainees = Randomizer.getRandom(50, 100);
 		for (int i = 0; i <= numOfTrainees; i++) {
 			Trainee trainee = TraineeFactory.generateTrainee();
 			getWaitingList().add(trainee);
@@ -54,13 +56,13 @@ public class Trainee implements Iterable<Trainee>{
 	}
 
 	@Override
-	public String toString () {
+	public String toString() {
 		return "Trainee{" +
 				"courseName='" + courseName + '\'' +
 				", id=" + id +
+				", monthsTrained=" + monthsTrained +
 				'}';
 	}
-
 
 	@Override
 	public Iterator<Trainee> iterator () {

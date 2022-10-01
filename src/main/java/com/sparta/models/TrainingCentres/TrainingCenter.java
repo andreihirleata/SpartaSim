@@ -2,15 +2,13 @@ package com.sparta.models.TrainingCentres;
 
 import com.sparta.Academy;
 import com.sparta.Trainee;
-
 import com.sparta.models.util.Randomizer;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 
-public abstract class TrainingCenter implements Iterable<Trainee>{
+public abstract class TrainingCenter {
 	private static int centerID = 0;
 	private List<Trainee> traineeList = new ArrayList<>();
 
@@ -62,8 +60,14 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
 		for (int i = 0; i < numOfTrainees; i++) {
 			assgintoTraining(Trainee.getWaitingList().peek());
-			Trainee.isTraining = true;
 		}
+//		for(TrainingCenter t: Academy.centerList){
+//			t.getTraineeList().stream().filter(tr -> tr.isIsTraining()).forEach(tr -> tr.setMonthsTrained(tr.getMonthsTrained() + 1));
+//		}
+	}
+
+	public void train(List<Trainee> traineeList) {
+		traineeList.stream().forEach(tr -> tr.setMonthsTrained(tr.getMonthsTrained() + 1));
 	}
 
 	public static void assgintoTraining(Trainee trainee) {
@@ -79,6 +83,9 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		Trainee.getWaitingList().remove(trainee);
 	}
 
+	public static void assignToClient() {
+
+	}
 	public static void closeCenters () {
 		for (TrainingCenter tc : Academy.centerList) {
 			if (tc instanceof Bootcamp && ((Bootcamp) tc).closureCheck(tc.monthsRunning)) {
@@ -109,6 +116,16 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		}
 	}
 
+	public void assingToBench() {
+		List<Trainee> trList = this.getTraineeList();
+		for(int i = 0; i < trList.size(); i++) {
+			Trainee tr = trList.get(i);
+			if(tr != null && tr.getMonthsTrained() >= 3) {
+				Academy.benchList.add(tr);
+				this.getTraineeList().remove(tr);
+			}
+		}
+	}
 	@Override
 	public String toString () {
 		return "TrainingCenter{" +
