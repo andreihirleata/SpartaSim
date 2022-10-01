@@ -16,9 +16,8 @@ public class Bootcamp extends TrainingCenter {
         months = monthsRunning;
         if(monthsRunning < 3 && getTraineeList().size() >= 25) {
             months = 0;
-            System.out.println("months post reset: " + monthsRunning);
+
         }
-        System.out.println("Testing months: " + monthsRunning);
         return monthsRunning == 3 && getTraineeList().size() < 25;
     }
 

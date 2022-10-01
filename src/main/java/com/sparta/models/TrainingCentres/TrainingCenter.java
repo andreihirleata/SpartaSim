@@ -56,7 +56,7 @@ public abstract class TrainingCenter {
 	}
 
 	public static void openDoors() {
-		int numOfTrainees = Randomizer.getRandom(0,50);
+		int numOfTrainees = Randomizer.getRandom(0,100);
 		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
 		for (int i = 0; i < numOfTrainees; i++) {
 			assgintoTraining(Trainee.getWaitingList().peek());
@@ -89,21 +89,21 @@ public abstract class TrainingCenter {
 	public static void closeCenters () {
 		for (TrainingCenter tc : Academy.centerList) {
 			if (tc instanceof Bootcamp && ((Bootcamp) tc).closureCheck(tc.monthsRunning)) {
-				System.out.println("bootcamp size: " + tc.getTraineeList().size());
+
 				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
 				tc.setClosed(true);
 				tc.getTraineeList().clear();
 			}
 
 			if (tc instanceof TrainingHub && ((TrainingHub) tc).closureCheck(tc.monthsRunning)) {
-				System.out.println("thub size: " + tc.getTraineeList().size());
+
 				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
 				tc.setClosed(true);
 				tc.getTraineeList().clear();
 			}
 
 			if (tc instanceof TechCentre && ((TechCentre) tc).closureCheck(tc.monthsRunning)) {
-				System.out.println("tcen size: " + tc.getTraineeList().size());
+
 				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
 				tc.setClosed(true);
 				tc.getTraineeList().clear();

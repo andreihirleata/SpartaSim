@@ -40,12 +40,6 @@ public class Trainee implements Iterable<Trainee>{
 		return waitingList;
 	}
 
-	public static Trainee setWaitingList (Trainee t) {
-		waitingList.addFirst(t);
-		System.out.println("Testing trainee passed in forEach loop: " + t.toString());
-		System.out.println("Testing waiting list: " + waitingList.toString());
-		return t;
-	}
 
 	public static void generateTrainees () {
 		int numOfTrainees = Randomizer.getRandom(50, 100);
