@@ -16,7 +16,7 @@ import java.util.List;
 public class Academy {
     private static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
-    public static List<Client> clientList = new ArrayList<>();
+    public List<Client> clientList = new ArrayList<>();
 
     int month = 0;
     int totalMonth = 0;
@@ -68,17 +68,6 @@ public class Academy {
         return Trainee.getWaitingList().size();
     }
 
-    public void addToBench(Trainee t){
-        if(t.getMonthsTrained() == 3) {
-            Academy.benchList.add(t);
-        }
-    }
-
-    public void addToClient(Trainee tr,Client cl) {
-        if(tr.getCourse().equals(cl.getCourseReq())){
-            cl.getClientTraineeList().add(tr);
-        }
-    }
     public void simulate(int months) {
 
         for (int i = 1; i <= months; i++) {
@@ -90,19 +79,15 @@ public class Academy {
                 clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
             }
+            if(Trainee.isTraining = true){
+                Trainee.MonthsTrained++;
+            }
 
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
             month++;
-            for(TrainingCenter tc : Academy.centerList) {
-                tc.getTraineeList().forEach(t -> {
-                    t.setMonthsTrained(t.getMonthsTrained() + 1);
-                   addToBench(t);
-                });
-            }
-            System.out.println(this.toString());
-            System.out.println(Academy.benchList.stream().count());
+            System.out.println(this);
         }
     }
 
@@ -112,7 +97,8 @@ public class Academy {
 
         for (TrainingCenter tc : centerList) {
             for (Trainee t : tc.getTraineeList()) {
-                if(t == null) {
+                if(t==null)
+                {
                     continue;
                 }
                 if (t.getCourse().equals(Courses.JAVA.getCourseName())) {
@@ -130,9 +116,6 @@ public class Academy {
         }
 
         for (Trainee t : Trainee.getWaitingList()) {
-            if(t == null) {
-                continue;
-            }
             if (t.getCourse().equals(Courses.JAVA.getCourseName())) {
                 JavaWaiting++;
             } else if (t.getCourse().equals(Courses.C_SHARP.getCourseName())) {
@@ -166,12 +149,13 @@ public class Academy {
                 "\nNumber of closed training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
 
+                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting()+
+
                 "\n---\nNumber of Java trainees in training: " + JavaTraining + "\nNumber of Java trainees waiting: " + JavaWaiting +
                 "\n---\nNumber of C# trainees in training: " + CsharpTraining + "\nNumber of C# trainees waiting: " + CsharpWaiting +
                 "\n---\nNumber of Data trainees in training: " + DataTraining + "\nNumber of Data trainees waiting: " + DataWaiting +
                 "\n---\nNumber of DevOps trainees in training: " + DevOpsTraining + "\nNumber of DevOps trainees waiting: " + DevOpsWaiting +
-                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting +
-                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting();
+                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting+"\n";
 
     }
 
