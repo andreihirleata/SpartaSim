@@ -89,26 +89,25 @@ public class Academy {
         }
     }
 
-    public void simulate(int months) {
+    public void simulate(int months,int choice) {
         for (int i = 1; i <= months; i++) {
             if (i % 2 == 0) {
                 TrainingCentreFactory.generateTrainingCentre();
             }
-            if(i >= 12) {
-                System.out.println("Creating Client");
-               if(Randomizer.getRandom(0,4) == 1 || clientList.size() == 0) clientList.add(ClientFactory.generateClient());
-                System.out.println(clientList.toString());
+            if (i >= 12) {
+                if (Randomizer.getRandom(0, 4) == 1 || clientList.size() == 0)
+                    clientList.add(ClientFactory.generateClient());
                 clientList.forEach(cl -> {
                     assert Academy.benchList.peek() != null;
-                    for(int j = 0; j <= Randomizer.getRandom(1,cl.getNumRequired()); j++ ) {
+                    for (int j = 0; j <= Randomizer.getRandom(1, cl.getNumRequired()); j++) {
                         assert Academy.benchList.peek() != null;
-                        if(Academy.benchList.stream().anyMatch(tr -> tr.getCourse().equals(cl.getCourseReq()))) {
+                        if (Academy.benchList.stream().anyMatch(tr -> tr.getCourse().equals(cl.getCourseReq()))) {
                             cl.assignToClient(Academy.benchList.stream().filter(tr -> tr.getCourse().equals(cl.getCourseReq())).findFirst().get());
                         }
                     }
 
                 });
-                for(int j = 0; j < this.clientList.size(); j++) {
+                for (int j = 0; j < this.clientList.size(); j++) {
                     Client cl = this.clientList.get(j);
                     if (cl.getMonthsRunning() == 12) {
                         cl.setMonthsRunning(0);
@@ -126,13 +125,15 @@ public class Academy {
                         tc.assingToBench();
                     }
             );
-            System.out.println("BENCH SIZE LIST" + Academy.benchList.size());
             TrainingCenter.closeCenters();
             month++;
+            if (choice == 2) {
+                System.out.println(this);
+            }
+        }
+        if (choice == 1) {
             System.out.println(this);
         }
-        System.out.println("Satisfied clients " + this.clientList.size());
-        System.out.println("Unsatisfied clients " + this.getUnsatisfiedClients());
     }
 
     @Override
@@ -192,15 +193,16 @@ public class Academy {
                 "\nNumber of full training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isFull()).count() +
                 "\nNumber of closed training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
-
-                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting()+
+                "\nNumber of happy clients: " + this.clientList.size() +
+                "\nNumber of unhappy clients : " + this.unsatisfiedClients +
 
                 "\n---\nNumber of Java trainees in training: " + JavaTraining + "\nNumber of Java trainees waiting: " + JavaWaiting +
                 "\n---\nNumber of C# trainees in training: " + CsharpTraining + "\nNumber of C# trainees waiting: " + CsharpWaiting +
                 "\n---\nNumber of Data trainees in training: " + DataTraining + "\nNumber of Data trainees waiting: " + DataWaiting +
                 "\n---\nNumber of DevOps trainees in training: " + DevOpsTraining + "\nNumber of DevOps trainees waiting: " + DevOpsWaiting +
-                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting+"\n";
-
+                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting +
+                "\n---\nNumber of trainees on the bench: " + Academy.benchList.size() +
+                 "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting() + "\n";
     }
 
     public String summaryOfSimulator() {

@@ -15,10 +15,6 @@ public class Main {
         System.out.println("Would you prefer to see a monthly breakdown or summary of the simulator?\nFor the summary of the simulator, type [1]\nFor monthly breakdown, type [2]");
         int summaryOption = inputSummary.nextInt();
         Academy academy = new Academy();
-        if (summaryOption == 1) {
-            academy.simulate(numberofMonths);
-        } else if (summaryOption == 2) {
-            System.out.println(academy.summaryOfSimulator());
-        }
+        academy.simulate(numberofMonths,summaryOption);
     }
 }
