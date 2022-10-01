@@ -92,6 +92,7 @@ public abstract class TrainingCenter {
 				System.out.println("bootcamp size: " + tc.getTraineeList().size());
 				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
 				tc.setClosed(true);
+				tc.getTraineeList().clear();
 			}
 
 			if (tc instanceof TrainingHub && ((TrainingHub) tc).closureCheck(tc.monthsRunning)) {
@@ -105,6 +106,7 @@ public abstract class TrainingCenter {
 				System.out.println("tcen size: " + tc.getTraineeList().size());
 				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
 				tc.setClosed(true);
+				tc.getTraineeList().clear();
 			}
 
 

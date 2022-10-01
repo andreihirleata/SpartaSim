@@ -10,6 +10,7 @@ public class Client {
     private final int id;
     private int numRequired;
     private String courseReq;
+    private int monthsRunning = 0;
     private List<Trainee> ClientTraineeList = new ArrayList<>();
 public Client(String course){
     this.courseReq = course;
@@ -36,6 +37,14 @@ public Client(String course){
 
     public List<Trainee> getClientTraineeList() {
         return ClientTraineeList;
+    }
+
+    public int getMonthsRunning() {
+        return monthsRunning;
+    }
+
+    public void setMonthsRunning(int monthsRunning) {
+        this.monthsRunning = monthsRunning;
     }
 
     public void assignToClient(Trainee tr) {
