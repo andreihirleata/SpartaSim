@@ -22,9 +22,6 @@ public class TrainingHub extends TrainingCenter {
     public TrainingHub() {
     }
 
-    public TrainingHub() {
-    }
-
     @Override
     public boolean isFull() {
         return getTraineeList().size() >= max;

@@ -30,10 +30,6 @@ public class Bootcamp extends TrainingCenter {
 
     }
 
-    public Bootcamp(){
-
-    }
-
     @Override
     public boolean isFull() {
         return getTraineeList().size() >= max;

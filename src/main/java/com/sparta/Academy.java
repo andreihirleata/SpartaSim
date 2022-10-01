@@ -87,7 +87,7 @@ public class Academy {
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
             month++;
-            System.out.println(this.toString());
+            System.out.println(this);
         }
     }
 
@@ -97,6 +97,10 @@ public class Academy {
 
         for (TrainingCenter tc : centerList) {
             for (Trainee t : tc.getTraineeList()) {
+                if(t==null)
+                {
+                    continue;
+                }
                 if (t.getCourse().equals(Courses.JAVA.getCourseName())) {
                     JavaTraining++;
                 } else if (t.getCourse().equals(Courses.C_SHARP.getCourseName())) {
@@ -145,12 +149,13 @@ public class Academy {
                 "\nNumber of closed training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
 
+                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting()+
+
                 "\n---\nNumber of Java trainees in training: " + JavaTraining + "\nNumber of Java trainees waiting: " + JavaWaiting +
                 "\n---\nNumber of C# trainees in training: " + CsharpTraining + "\nNumber of C# trainees waiting: " + CsharpWaiting +
                 "\n---\nNumber of Data trainees in training: " + DataTraining + "\nNumber of Data trainees waiting: " + DataWaiting +
                 "\n---\nNumber of DevOps trainees in training: " + DevOpsTraining + "\nNumber of DevOps trainees waiting: " + DevOpsWaiting +
-                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting +
-                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting();
+                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting+"\n";
 
     }
 
