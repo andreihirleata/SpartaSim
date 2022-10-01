@@ -131,8 +131,8 @@ public class Academy {
             month++;
             System.out.println(this);
         }
-        System.out.println(this.clientList.size());
-        System.out.println(this.getUnsatisfiedClients());
+        System.out.println("Satisfied clients " + this.clientList.size());
+        System.out.println("Unsatisfied clients " + this.getUnsatisfiedClients());
     }
 
     @Override
