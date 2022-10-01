@@ -13,13 +13,13 @@ public class Bootcamp extends TrainingCenter {
     private LocalDate clientPlacementDate = startDate.plusMonths(3);
 
     public boolean closureCheck(int monthsRunning) {
-        if(months < 3 && getTraineeList().size() >= 25) {
+        months = monthsRunning;
+        if(monthsRunning < 3 && getTraineeList().size() >= 25) {
             months = 0;
-            System.out.println("months post reset: " + months);
+            System.out.println("months post reset: " + monthsRunning);
         }
-        months++;
-        System.out.println("Testing months: " + months);
-        return months == 3 && getTraineeList().size() < 25;
+        System.out.println("Testing months: " + monthsRunning);
+        return monthsRunning == 3 && getTraineeList().size() < 25;
     }
 
     public boolean clientPlacementCheck() {

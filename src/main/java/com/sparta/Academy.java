@@ -18,9 +18,18 @@ public class Academy {
     public static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
     public List<Client> clientList = new ArrayList<>();
+    private int unsatisfiedClients = 0;
 
     int month = 0;
     int totalMonth = 0;
+
+    public int getUnsatisfiedClients() {
+        return unsatisfiedClients;
+    }
+
+    public void setUnsatisfiedClients(int unsatisfiedClients) {
+        this.unsatisfiedClients = unsatisfiedClients;
+    }
 
     public void addCenter(TrainingCenter center) {
         centerList.add(center);
@@ -70,24 +79,46 @@ public class Academy {
         return Trainee.getWaitingList().size();
     }
 
-    public void simulate(int months) {
+    public void clientSatisified(Client cl) {
+        if(cl.getClientTraineeList().size() < cl.getNumRequired()) {
+            Academy.benchList.addAll(cl.getClientTraineeList());
+            this.clientList.remove(cl);
+            this.setUnsatisfiedClients(this.getUnsatisfiedClients() + 1);
+        } else {
+            cl.getClientTraineeList().clear();
+        }
+    }
 
+    public void simulate(int months) {
         for (int i = 1; i <= months; i++) {
             if (i % 2 == 0) {
                 TrainingCentreFactory.generateTrainingCentre();
             }
             if(i >= 12) {
                 System.out.println("Creating Client");
-               if(Randomizer.getRandom(0,1) == 1 || clientList.size() == 0) clientList.add(ClientFactory.generateClient());
+               if(Randomizer.getRandom(0,4) == 1 || clientList.size() == 0) clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
                 clientList.forEach(cl -> {
                     assert Academy.benchList.peek() != null;
                     for(int j = 0; j <= Randomizer.getRandom(1,cl.getNumRequired()); j++ ) {
                         assert Academy.benchList.peek() != null;
-                        cl.assignToClient(Academy.benchList.peek());
+                        if(Academy.benchList.stream().anyMatch(tr -> tr.getCourse().equals(cl.getCourseReq()))) {
+                            cl.assignToClient(Academy.benchList.stream().filter(tr -> tr.getCourse().equals(cl.getCourseReq())).findFirst().get());
+                        }
                     }
+
                 });
+                for(int j = 0; j < this.clientList.size(); j++) {
+                    Client cl = this.clientList.get(j);
+                    if (cl.getMonthsRunning() == 12) {
+                        cl.setMonthsRunning(0);
+                        clientSatisified(cl);
+                    }
+                }
+                this.clientList.forEach(cl -> cl.setMonthsRunning(cl.getMonthsRunning() + 1));
             }
+
+
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             Academy.centerList.stream().forEach(tc -> {
@@ -99,8 +130,9 @@ public class Academy {
             TrainingCenter.closeCenters();
             month++;
             System.out.println(this);
-            System.out.println(Academy.benchList.size());
         }
+        System.out.println(this.clientList.size());
+        System.out.println(this.getUnsatisfiedClients());
     }
 
     @Override
