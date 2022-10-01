@@ -4,10 +4,8 @@ import com.sparta.models.TrainingCentres.factory.TraineeFactory;
 import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Iterator;
-import java.util.function.Consumer;
 
 public class Trainee implements Iterable<Trainee>{
 	private final String courseName;
@@ -58,13 +56,13 @@ public class Trainee implements Iterable<Trainee>{
 	}
 
 	@Override
-	public String toString () {
+	public String toString() {
 		return "Trainee{" +
 				"courseName='" + courseName + '\'' +
 				", id=" + id +
+				", monthsTrained=" + monthsTrained +
 				'}';
 	}
-
 
 	@Override
 	public Iterator<Trainee> iterator () {

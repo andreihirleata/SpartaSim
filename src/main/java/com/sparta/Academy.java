@@ -7,6 +7,7 @@ import com.sparta.models.TrainingCentres.TrainingHub;
 import com.sparta.models.TrainingCentres.factory.ClientFactory;
 import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
+import com.sparta.models.util.Randomizer;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.Deque;
 import java.util.List;
 
 public class Academy {
-    private static Deque<Trainee> benchList = new ArrayDeque<>();
+    public static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
     public List<Client> clientList = new ArrayList<>();
 
@@ -64,6 +65,7 @@ public class Academy {
         return num;
     }
 
+
     public int getNumberOfTraineesWaiting() {
         return Trainee.getWaitingList().size();
     }
@@ -74,20 +76,30 @@ public class Academy {
             if (i % 2 == 0) {
                 TrainingCentreFactory.generateTrainingCentre();
             }
-            if (i % 12 == 0) {
+            if(i >= 12) {
                 System.out.println("Creating Client");
-                clientList.add(ClientFactory.generateClient());
+               if(Randomizer.getRandom(0,1) == 1 || clientList.size() == 0) clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
+                clientList.forEach(cl -> {
+                    assert Academy.benchList.peek() != null;
+                    for(int j = 0; j <= Randomizer.getRandom(1,cl.getNumRequired()); j++ ) {
+                        assert Academy.benchList.peek() != null;
+                        cl.assignToClient(Academy.benchList.peek());
+                    }
+                });
             }
-            if(Trainee.isTraining = true){
-                Trainee.MonthsTrained++;
-            }
-
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
+            Academy.centerList.stream().forEach(tc -> {
+                        tc.train(tc.getTraineeList());
+                        tc.assingToBench();
+                    }
+            );
+            System.out.println("BENCH SIZE LIST" + Academy.benchList.size());
             TrainingCenter.closeCenters();
             month++;
             System.out.println(this);
+            System.out.println(Academy.benchList.size());
         }
     }
 

@@ -57,18 +57,18 @@ public class TechCentre extends TrainingCenter {
         return result;
     }
 
-    @Override
-    public Iterator<Trainee> iterator () {
-        return new Iterator<Trainee>() {
-            @Override
-            public boolean hasNext () {
-                return false;
-            }
-
-            @Override
-            public Trainee next () {
-                return null;
-            }
-        };
-    }
+//    @Override
+//    public Iterator<Trainee> iterator () {
+//        return new Iterator<Trainee>() {
+//            @Override
+//            public boolean hasNext () {
+//                return false;
+//            }
+//
+//            @Override
+//            public Trainee next () {
+//                return null;
+//            }
+//        };
+//    }
 }

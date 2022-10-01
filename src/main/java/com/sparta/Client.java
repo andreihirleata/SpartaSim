@@ -21,8 +21,6 @@ public Client(String course){
         return id;
     }
 
-
-
     public int getNumRequired() {
         return numRequired;
     }
@@ -38,6 +36,13 @@ public Client(String course){
 
     public List<Trainee> getClientTraineeList() {
         return ClientTraineeList;
+    }
+
+    public void assignToClient(Trainee tr) {
+        if(tr.getCourse().equals(this.courseReq)) {
+            this.getClientTraineeList().add(tr);
+            Academy.benchList.remove(tr);
+        }
     }
 
     @Override
