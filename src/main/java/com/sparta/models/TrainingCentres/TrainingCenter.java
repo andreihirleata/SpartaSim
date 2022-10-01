@@ -9,81 +9,112 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class TrainingCenter {
-    private static int centerID =0;
-    private  List<Trainee> traineeList = new ArrayList<>();
+
+public abstract class TrainingCenter implements Iterable<Trainee>{
+	private static int centerID = 0;
+	private List<Trainee> traineeList = new ArrayList<>();
 
 
-    private  boolean closed = false;
+	private boolean closed = false;
 
-    public void setClosed(boolean closed) {
-        this.closed = closed;
-    }
-public boolean getClosed() {
-        return this.closed;
-}
-    public  List<Trainee> getTraineeList() {
-        return traineeList;
-    }
+	public void setClosed (boolean closed) {
+		this.closed = closed;
+	}
 
-    public TrainingCenter(){
-        setCenterID(centerID++);
-    }
+	public boolean getClosed () {
+		return this.closed;
+	}
 
-    public abstract boolean isFull();
+	public List<Trainee> getTraineeList () {
+		return traineeList;
+	}
 
-    public void setMonthsRunning(int monthsRunning) {
-        this.monthsRunning = monthsRunning;
-    }
+	public TrainingCenter () {
+		setCenterID(centerID++);
+	}
 
-    private int monthsRunning = 0;
+	public abstract boolean isFull ();
 
-    public int getMonthsRunning() {
-        return monthsRunning;
-    }
-    public int getCenterID() {return centerID;}
-    public boolean isClosed() {return closed;}
+	public void setMonthsRunning (int monthsRunning) {
+		this.monthsRunning = monthsRunning;
+	}
 
-    public void setCenterID(int centerID) {
-        this.centerID = centerID;
-    }
+	private int monthsRunning = 0;
 
-    public static void openDoors() {
-        for(TrainingCenter trainingcenter:Academy.centerList) {
-            int numOfTrainees = Randomizer.getRandom(0, 50);
-            for (int i = 0; i < numOfTrainees; i++) {
-                assgintoTraining(Trainee.getWaitingList().peek(),trainingcenter);
-            }
-        }
-    }
+	public int getMonthsRunning () {
+		return monthsRunning;
+	}
 
-    public static void assgintoTraining(Trainee trainee,TrainingCenter trainingcenter) {
-        if(!trainingcenter.isFull() && !trainingcenter.isClosed())
-        {
-            trainingcenter.getTraineeList().add(trainee);
-            Trainee.getWaitingList().remove(trainee);
-        }
-    }
+	public int getCenterID () {
+		return centerID;
+	}
 
-    public static void closeCenters() {
-        for(TrainingCenter tc:Academy.centerList) {
-            if (tc.getMonthsRunning() >= 1 && tc.getTraineeList().size() < 25) {
-                for (Trainee t : tc.getTraineeList()) {
-                    Trainee.getWaitingList().addFirst(t);
-                    }
-                    tc.setClosed(true);
-                    tc.getTraineeList().clear();
-                }
-            tc.setMonthsRunning(tc.getMonthsRunning() + 1);
-        }
-    }
+	public boolean isClosed () {
+		return closed;
+	}
 
-    @Override
-    public String toString() {
-        return "TrainingCenter{" +
-                "centerID=" + centerID +
-                '}';
-    }
+	public void setCenterID (int centerID) {
+		this.centerID = centerID;
+	}
+
+	public static void openDoors() {
+		int numOfTrainees = Randomizer.getRandom(0,50);
+		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
+		for (int i = 0; i < numOfTrainees; i++) {
+			assgintoTraining(Trainee.getWaitingList().peek());
+			Trainee.isTraining = true;
+		}
+	}
+
+	public static void assgintoTraining(Trainee trainee) {
+		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
+		TrainingCenter t;
+		do {
+			if (!centers.hasNext()) {
+				return;
+			}
+			t = centers.next();
+		} while(t.isFull() || t.isClosed());
+		t.getTraineeList().add(trainee);
+		Trainee.getWaitingList().remove(trainee);
+	}
+
+	public static void closeCenters () {
+		for (TrainingCenter tc : Academy.centerList) {
+			if (tc instanceof Bootcamp && ((Bootcamp) tc).closureCheck(tc.monthsRunning)) {
+				System.out.println("bootcamp size: " + tc.getTraineeList().size());
+				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
+				tc.setClosed(true);
+			}
+
+			if (tc instanceof TrainingHub && ((TrainingHub) tc).closureCheck(tc.monthsRunning)) {
+				System.out.println("thub size: " + tc.getTraineeList().size());
+				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
+				tc.setClosed(true);
+				tc.getTraineeList().clear();
+			}
+
+			if (tc instanceof TechCentre && ((TechCentre) tc).closureCheck(tc.monthsRunning)) {
+				System.out.println("tcen size: " + tc.getTraineeList().size());
+				tc.getTraineeList().forEach(Trainee.getWaitingList()::addFirst);
+				tc.setClosed(true);
+			}
+
+
+
+//			for (Trainee t : tc.getTraineeList()) {
+//				Trainee.getWaitingList().addFirst(t);
+//			}
+			tc.setMonthsRunning(tc.getMonthsRunning() + 1);
+		}
+	}
+
+	@Override
+	public String toString () {
+		return "TrainingCenter{" +
+				"centerID=" + centerID +
+				'}';
+	}
 
 
 

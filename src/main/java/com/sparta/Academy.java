@@ -8,10 +8,13 @@ import com.sparta.models.TrainingCentres.factory.ClientFactory;
 import com.sparta.models.TrainingCentres.factory.TrainingCentreFactory;
 import com.sparta.models.util.Courses;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class Academy {
+    private static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
     public List<Client> clientList = new ArrayList<>();
 
@@ -76,12 +79,15 @@ public class Academy {
                 clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
             }
+            if(Trainee.isTraining = true){
+                Trainee.MonthsTrained++;
+            }
+
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
-
             month++;
-            System.out.println(this);
+            System.out.println(this.toString());
         }
     }
 
@@ -138,13 +144,13 @@ public class Academy {
                 "\nNumber of full training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isFull()).count() +
                 "\nNumber of closed training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
-                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting()+
+
                 "\n---\nNumber of Java trainees in training: " + JavaTraining + "\nNumber of Java trainees waiting: " + JavaWaiting +
                 "\n---\nNumber of C# trainees in training: " + CsharpTraining + "\nNumber of C# trainees waiting: " + CsharpWaiting +
                 "\n---\nNumber of Data trainees in training: " + DataTraining + "\nNumber of Data trainees waiting: " + DataWaiting +
                 "\n---\nNumber of DevOps trainees in training: " + DevOpsTraining + "\nNumber of DevOps trainees waiting: " + DevOpsWaiting +
-                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting+"\n";
-
+                "\n---\nNumber of Business trainees in training: " + BusinessTraining + "\nNumber of Business trainees waiting: " + BusinessWaiting +
+                "\n---\nNumber of trainees in training: " + getNumberOfTraineesTraining() + "\nNumber of trainees waiting: " + getNumberOfTraineesWaiting();
 
     }
 
