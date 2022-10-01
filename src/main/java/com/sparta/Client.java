@@ -10,7 +10,7 @@ public class Client {
     private final int id;
     private int numRequired;
     private String courseReq;
-    public List<Trainee> ClientTraineeList = new ArrayList<>();
+    private List<Trainee> ClientTraineeList = new ArrayList<>();
 public Client(String course){
     this.courseReq = course;
     this.numRequired = Randomizer.getRandom(15,100);
@@ -30,6 +30,14 @@ public Client(String course){
 
     public String getCourseReq() {
         return courseReq;
+    }
+
+    public void setClientTraineeList(List<Trainee> clientTraineeList) {
+        ClientTraineeList = clientTraineeList;
+    }
+
+    public List<Trainee> getClientTraineeList() {
+        return ClientTraineeList;
     }
 
     @Override

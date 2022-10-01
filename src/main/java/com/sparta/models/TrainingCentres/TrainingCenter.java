@@ -2,9 +2,7 @@ package com.sparta.models.TrainingCentres;
 
 import com.sparta.Academy;
 import com.sparta.Trainee;
-
 import com.sparta.models.util.Randomizer;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -62,8 +60,10 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
 		for (int i = 0; i < numOfTrainees; i++) {
 			assgintoTraining(Trainee.getWaitingList().peek());
-			Trainee.isTraining = true;
 		}
+//		for(TrainingCenter t: Academy.centerList){
+//			t.getTraineeList().stream().filter(tr -> tr.isIsTraining()).forEach(tr -> tr.setMonthsTrained(tr.getMonthsTrained() + 1));
+//		}
 	}
 
 	public static void assgintoTraining(Trainee trainee) {
@@ -79,6 +79,9 @@ public abstract class TrainingCenter implements Iterable<Trainee>{
 		Trainee.getWaitingList().remove(trainee);
 	}
 
+	public static void assignToClient() {
+
+	}
 	public static void closeCenters () {
 		for (TrainingCenter tc : Academy.centerList) {
 			if (tc instanceof Bootcamp && ((Bootcamp) tc).closureCheck(tc.monthsRunning)) {

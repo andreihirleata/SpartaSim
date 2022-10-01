@@ -14,9 +14,7 @@ public class Trainee implements Iterable<Trainee>{
 	private static int idIncrement = 0;
 	private final int id;
 
-
-	public static int MonthsTrained = 0;
-	public static boolean isTraining;
+	private int monthsTrained = 0;
 
 	private static Deque<Trainee> waitingList = new ArrayDeque<>();
 
@@ -24,7 +22,13 @@ public class Trainee implements Iterable<Trainee>{
 		this.courseName = courseName;
 		this.id = idIncrement++;
 	}
+	public  int getMonthsTrained() {
+		return this.monthsTrained;
+	}
 
+	public  void setMonthsTrained(int monthsTrained) {
+		this.monthsTrained = monthsTrained;
+	}
 
 	public int getId () {
 		return id;

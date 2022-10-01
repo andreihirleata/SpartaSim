@@ -16,7 +16,7 @@ import java.util.List;
 public class Academy {
     private static Deque<Trainee> benchList = new ArrayDeque<>();
     public static List<TrainingCenter> centerList = new ArrayList<>();
-    public List<Client> clientList = new ArrayList<>();
+    public static List<Client> clientList = new ArrayList<>();
 
     int month = 0;
     int totalMonth = 0;
@@ -68,6 +68,17 @@ public class Academy {
         return Trainee.getWaitingList().size();
     }
 
+    public void addToBench(Trainee t){
+        if(t.getMonthsTrained() == 3) {
+            Academy.benchList.add(t);
+        }
+    }
+
+    public void addToClient(Trainee tr,Client cl) {
+        if(tr.getCourse().equals(cl.getCourseReq())){
+            cl.getClientTraineeList().add(tr);
+        }
+    }
     public void simulate(int months) {
 
         for (int i = 1; i <= months; i++) {
@@ -79,15 +90,19 @@ public class Academy {
                 clientList.add(ClientFactory.generateClient());
                 System.out.println(clientList.toString());
             }
-            if(Trainee.isTraining = true){
-                Trainee.MonthsTrained++;
-            }
 
             Trainee.generateTrainees();
             TrainingCenter.openDoors();
             TrainingCenter.closeCenters();
             month++;
+            for(TrainingCenter tc : Academy.centerList) {
+                tc.getTraineeList().forEach(t -> {
+                    t.setMonthsTrained(t.getMonthsTrained() + 1);
+                   addToBench(t);
+                });
+            }
             System.out.println(this.toString());
+            System.out.println(Academy.benchList.stream().count());
         }
     }
 
