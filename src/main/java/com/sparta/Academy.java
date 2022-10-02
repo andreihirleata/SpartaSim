@@ -193,7 +193,7 @@ public class Academy {
                 "\nNumber of full training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isFull()).count() +
                 "\nNumber of closed training hubs: " + centerList.stream().filter(e -> e instanceof TrainingHub).filter(e -> e.isClosed()).count() +
 
-                "\nNumber of happy clients: " + this.clientList.size() +
+                "\n---\nNumber of happy clients: " + this.clientList.size() +
                 "\nNumber of unhappy clients : " + this.unsatisfiedClients +
 
                 "\n---\nNumber of Java trainees in training: " + JavaTraining + "\nNumber of Java trainees waiting: " + JavaWaiting +
