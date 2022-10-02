@@ -56,10 +56,15 @@ public abstract class TrainingCenter {
 	}
 
 	public static void openDoors() {
-		int numOfTrainees = Randomizer.getRandom(0,100);
+
 		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
-		for (int i = 0; i < numOfTrainees; i++) {
-			assgintoTraining(Trainee.getWaitingList().peek());
+		for(TrainingCenter tc : Academy.centerList) {
+			int numOfTrainees = Randomizer.getRandom(0,50);
+			for (int i = 0; i < numOfTrainees; i++) {
+				if(Trainee.getWaitingList().peek() != null) {
+					assgintoTraining(Trainee.getWaitingList().peek(), tc);
+				}
+			}
 		}
 //		for(TrainingCenter t: Academy.centerList){
 //			t.getTraineeList().stream().filter(tr -> tr.isIsTraining()).forEach(tr -> tr.setMonthsTrained(tr.getMonthsTrained() + 1));
@@ -67,20 +72,24 @@ public abstract class TrainingCenter {
 	}
 
 	public void train(List<Trainee> traineeList) {
-		traineeList.stream().forEach(tr -> tr.setMonthsTrained(tr.getMonthsTrained() + 1));
+		traineeList.stream().forEach(tr ->{
+			if(tr != null) tr.setMonthsTrained(tr.getMonthsTrained() + 1);
+		});
 	}
 
-	public static void assgintoTraining(Trainee trainee) {
-		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
-		TrainingCenter t;
-		do {
-			if (!centers.hasNext()) {
-				return;
-			}
-			t = centers.next();
-		} while(t.isFull() || t.isClosed());
-		t.getTraineeList().add(trainee);
-		Trainee.getWaitingList().remove(trainee);
+	public static void assgintoTraining(Trainee trainee,TrainingCenter tc) {
+//		Iterator<TrainingCenter> centers = Academy.centerList.iterator();
+//		TrainingCenter t;
+//		do {
+//			if (!centers.hasNext()) {
+//				return;
+//			}
+//			t = centers.next();
+//		} while(t.isFull() || t.isClosed());
+		if(!tc.isFull() && !tc.isClosed()) {
+			tc.getTraineeList().add(trainee);
+			Trainee.getWaitingList().remove(trainee);
+		}
 	}
 
 	public static void assignToClient() {

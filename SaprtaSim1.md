@@ -41,7 +41,6 @@ You have been asked to build a simulator which will help track the number of peo
 	- number of trainees currently training (breakdown for each type)
 	- number of trainees on the waiting list (breakdown for each type)
 
-// DO THE THING WITH THE THING TECH CENTRE
 ## Stage 3 requirements:
 
 - If a trainee has been in training for 3 months, they are moved to a bench state.
